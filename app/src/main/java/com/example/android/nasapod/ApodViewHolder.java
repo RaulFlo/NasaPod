@@ -12,17 +12,17 @@ import com.bumptech.glide.Glide;
 
 public class ApodViewHolder extends RecyclerView.ViewHolder {
 
-    public ImageView mImageUrl;
+    public ImageView mImageView;
     public TextView mTitleName;
     public TextView mDate;
-    private Context mContext;
+
 
 
     public ApodViewHolder(@NonNull View itemView) {
         super(itemView);
 
 
-        mImageUrl = itemView.findViewById(R.id.imageview_imageUrl);
+        mImageView = itemView.findViewById(R.id.imageview_image);
         mTitleName = itemView.findViewById(R.id.textview_titleName);
         mDate = itemView.findViewById(R.id.textview_date);
     }
@@ -31,7 +31,7 @@ public class ApodViewHolder extends RecyclerView.ViewHolder {
 
         String imageUrl = anApod.getApodImage();
         //Glide for ImageView
-        Glide.with(mContext).load(imageUrl).fitCenter().into(mImageUrl);
+        Glide.with(itemView.getContext()).load(imageUrl).fitCenter().into(mImageView);
         mTitleName.setText(anApod.getApodName());
         mDate.setText(anApod.getApodDate());
 
@@ -39,6 +39,5 @@ public class ApodViewHolder extends RecyclerView.ViewHolder {
 
 
 }
-
 
 
