@@ -11,14 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> {
 
     private static final String TAG = "NASAapod";
 
-    private ArrayList<Apod> mApodList;
+    private List<Apod> mApodList;
 
-    public ApodAdapter(ArrayList<Apod> apodList) {
+    public ApodAdapter(List<Apod> apodList) {
         mApodList = apodList;
     }
 

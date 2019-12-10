@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private ApodAdapter mApodAdapter;
-    private ArrayList<Apod> mApodList;
+    private List<Apod> mApodList;
 
 
     @Override
@@ -33,8 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         ApodRepo fakeApodRepo = new FakeApodRepo();
-        //create a new ArrayList that we fill with our data
-        mApodList = (ArrayList) fakeApodRepo.getListPicOfTheDay();
+        //create a new List that we fill with our data
+        mApodList = fakeApodRepo.getListPicOfTheDay();
+
 
 
         mApodAdapter = new ApodAdapter(mApodList);
