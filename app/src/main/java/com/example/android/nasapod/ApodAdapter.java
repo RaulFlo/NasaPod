@@ -29,7 +29,7 @@ public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> {
     public ApodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         Log.d(TAG, "onCreateViewHolder");
-        View v = LayoutInflater.from(mContext).inflate(R.layout.single_apod, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_apod, parent, false);
         return new ApodViewHolder(v);
     }
 

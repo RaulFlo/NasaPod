@@ -14,7 +14,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
 
-
     private RecyclerView mRecyclerView;
     private ApodAdapter mApodAdapter;
     private ArrayList<Apod> mApodList;
@@ -33,14 +32,9 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-        //create a new ArrayList that we fill with our data
-        mApodList = new ArrayList<>();
-
-
-
         FakeApodRepo fakeApodRepo = new FakeApodRepo();
-
-        ArrayList<Apod> mApodList= (ArrayList) fakeApodRepo.getListPicOfTheDay();
+        //create a new ArrayList that we fill with our data
+        ArrayList<Apod> mApodList = (ArrayList) fakeApodRepo.getListPicOfTheDay();
 
 
         mApodAdapter = new ApodAdapter(MainActivity.this, mApodList);
