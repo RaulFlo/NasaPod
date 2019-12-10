@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,5 +38,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        FakeApodRepo fakeApodRepo = new FakeApodRepo();
+
+        ArrayList<Apod> mApodList= (ArrayList) fakeApodRepo.getListPicOfTheDay();
+
+
+        mApodAdapter = new ApodAdapter(MainActivity.this, mApodList);
+        mRecyclerView.setAdapter(mApodAdapter);
     }
 }
