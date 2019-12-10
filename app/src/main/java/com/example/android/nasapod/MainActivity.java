@@ -34,10 +34,10 @@ public class MainActivity extends AppCompatActivity {
 
         FakeApodRepo fakeApodRepo = new FakeApodRepo();
         //create a new ArrayList that we fill with our data
-        ArrayList<Apod> mApodList = (ArrayList) fakeApodRepo.getListPicOfTheDay();
+        mApodList = (ArrayList) fakeApodRepo.getListPicOfTheDay();
 
 
-        mApodAdapter = new ApodAdapter(MainActivity.this, mApodList);
+        mApodAdapter = new ApodAdapter(mApodList);
         mRecyclerView.setAdapter(mApodAdapter);
     }
 }

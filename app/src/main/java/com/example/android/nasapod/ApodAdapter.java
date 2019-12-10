@@ -15,11 +15,10 @@ import java.util.ArrayList;
 public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> {
 
     private static final String TAG = "NASAapod";
-    private Context mContext;
+
     private ArrayList<Apod> mApodList;
 
-    public ApodAdapter(Context context, ArrayList<Apod> apodList) {
-        mContext = context;
+    public ApodAdapter(ArrayList<Apod> apodList) {
         mApodList = apodList;
     }
 
@@ -36,11 +35,10 @@ public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ApodViewHolder holder, int position) {
 
-        Log.d(TAG,"onBindViewHolder");
+        Log.d(TAG, "onBindViewHolder");
         Apod currentApod = mApodList.get(position);
 
         holder.bind(currentApod);
-
 
     }
 
