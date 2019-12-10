@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-        FakeApodRepo fakeApodRepo = new FakeApodRepo();
+        ApodRepo fakeApodRepo = new FakeApodRepo();
         //create a new ArrayList that we fill with our data
         mApodList = (ArrayList) fakeApodRepo.getListPicOfTheDay();
 
