@@ -22,9 +22,9 @@ public class ApodViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
 
 
-        mImageView = itemView.findViewById(R.id.imageview_image);
-        mTitleName = itemView.findViewById(R.id.textview_titleName);
-        mDate = itemView.findViewById(R.id.textview_date);
+        mImageView = itemView.findViewById(R.id.image_view_image);
+        mTitleName = itemView.findViewById(R.id.text_view_titleName);
+        mDate = itemView.findViewById(R.id.text_view_date);
     }
 
     public void bind(Apod anApod) {
