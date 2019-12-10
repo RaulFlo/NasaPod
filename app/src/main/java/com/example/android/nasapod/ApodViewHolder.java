@@ -27,6 +27,9 @@ public class ApodViewHolder extends RecyclerView.ViewHolder {
         mDate = itemView.findViewById(R.id.text_view_date);
     }
 
+
+
+
     public void bind(Apod anApod) {
 
         String imageUrl = anApod.getApodImage();

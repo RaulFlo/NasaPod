@@ -1,0 +1,47 @@
+package com.example.android.nasapod;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
+public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> {
+
+    private Context mContext;
+    private ArrayList<Apod> mApodList;
+
+    public ApodAdapter(Context context, ArrayList<Apod> apodList) {
+        mContext = context;
+        mApodList = apodList;
+    }
+
+
+    @NonNull
+    @Override
+    public ApodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(mContext).inflate(R.layout.single_apod, parent, false);
+        return new ApodViewHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ApodViewHolder holder, int position) {
+        Apod currentApod = mApodList.get(position);
+
+        holder.bind(currentApod);
+
+
+    }
+
+
+    @Override
+    public int getItemCount() {
+        return mApodList.size();
+    }
+
+
+}
