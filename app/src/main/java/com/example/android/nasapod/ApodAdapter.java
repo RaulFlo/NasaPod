@@ -16,7 +16,7 @@ import java.util.List;
 public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> implements ApodViewHolder.Listener {
 
     interface AdapterListener {
-        void onItemClick(Apod item);
+        void onItemClick(Apod apod);
     }
 
     private static final String TAG = "NASAapod";
@@ -58,7 +58,7 @@ public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> implements
 
     @Override
     public void onItemClick(int adapterPosition) {
-        Apod item = mApodList.get(adapterPosition);
-        mListener.onItemClick(item);
+        Apod apod = mApodList.get(adapterPosition);
+        mListener.onItemClick(apod);
     }
 }
