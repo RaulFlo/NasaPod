@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import org.json.JSONObject;
 
@@ -17,6 +18,8 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
     public static final String EXTRA_IMAGE = "image";
     public static final String EXTRA_TITLE = "title";
     public static final String EXTRA_DATE = "date";
+
+    private static final String TAG = "MainActivity";
 
 
     private RecyclerView mRecyclerView;
@@ -52,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
 
     @Override
     public void onItemClick(Apod apod) {
+        Log.d(TAG, "onItemClick: +++++++++++++++");
         Intent detailIntent = new Intent(this, DetailActivity.class);
 
         detailIntent.putExtra(EXTRA_IMAGE, apod.getApodImage());
