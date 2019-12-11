@@ -1,7 +1,5 @@
-package com.example.android.nasapod;
+package com.example.android.nasapod.adapter;
 
-import android.content.Context;
-import android.icu.text.IDNA;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +8,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.example.android.nasapod.R;
+import com.example.android.nasapod.adapter.ApodViewHolder;
+import com.example.android.nasapod.models.Apod;
+
 import java.util.List;
 
 public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> implements ApodViewHolder.Listener {
 
-    interface AdapterListener {
+    public interface AdapterListener {
         void onItemClick(Apod apod);
     }
 

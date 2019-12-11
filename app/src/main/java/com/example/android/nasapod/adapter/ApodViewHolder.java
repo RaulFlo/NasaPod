@@ -1,8 +1,5 @@
-package com.example.android.nasapod;
+package com.example.android.nasapod.adapter;
 
-import android.content.Context;
-import android.net.sip.SipAudioCall;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.android.nasapod.R;
+import com.example.android.nasapod.models.Apod;
 
 public class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
