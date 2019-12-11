@@ -13,14 +13,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> {
+public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> implements ApodViewHolder.Listener {
+
+    interface AdapterListener {
+        void onItemClick(Apod item);
+    }
 
     private static final String TAG = "NASAapod";
 
     private List<Apod> mApodList;
+    private AdapterListener mListener;
 
-    public ApodAdapter(List<Apod> apodList) {
+    public ApodAdapter(List<Apod> apodList, AdapterListener listener) {
         mApodList = apodList;
+        mListener = listener;
     }
 
 
@@ -30,7 +36,7 @@ public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> {
 
         Log.d(TAG, "onCreateViewHolder");
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_apod, parent, false);
-        return new ApodViewHolder(v);
+        return new ApodViewHolder(v,this);
     }
 
     @Override
@@ -50,4 +56,9 @@ public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> {
     }
 
 
+    @Override
+    public void onItemClick(int adapterPosition) {
+        Apod item = mApodList.get(adapterPosition);
+        mListener.onItemClick(item);
+    }
 }
