@@ -26,10 +26,7 @@ public class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     public Listener mListener;
 
 
-
-
-
-    public ApodViewHolder(@NonNull View itemView,Listener listener) {
+    public ApodViewHolder(@NonNull View itemView, Listener listener) {
         super(itemView);
 
         mListener = listener;
@@ -40,8 +37,6 @@ public class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         //link the click listener
         itemView.setOnClickListener(this);
     }
-
-
 
 
     public void bind(Apod anApod) {
@@ -57,11 +52,9 @@ public class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     @Override
     public void onClick(View view) {
-        Log.d(TAG, "onClick: =======");
-
-        if(mListener != null){
+        if (mListener != null) {
             int position = getAdapterPosition();
-            if(position != RecyclerView.NO_POSITION){
+            if (position != RecyclerView.NO_POSITION) {
                 mListener.onItemClick(position);
             }
         }

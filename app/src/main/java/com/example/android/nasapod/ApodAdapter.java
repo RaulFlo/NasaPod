@@ -36,7 +36,7 @@ public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> implements
 
         Log.d(TAG, "onCreateViewHolder");
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_apod, parent, false);
-        return new ApodViewHolder(v,this);
+        return new ApodViewHolder(v, this);
     }
 
     @Override
@@ -58,7 +58,6 @@ public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> implements
 
     @Override
     public void onItemClick(int adapterPosition) {
-        Log.d(TAG, "onItemClick: +++++++++++++++++++++");
         Apod apod = mApodList.get(adapterPosition);
         mListener.onItemClick(apod);
     }

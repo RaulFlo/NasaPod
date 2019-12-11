@@ -45,17 +45,13 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         mApodList = fakeApodRepo.getListPicOfTheDay();
 
 
-
-        mApodAdapter = new ApodAdapter(mApodList,this);
+        mApodAdapter = new ApodAdapter(mApodList, this);
         mRecyclerView.setAdapter(mApodAdapter);
     }
 
 
-
-
     @Override
     public void onItemClick(Apod apod) {
-        Log.d(TAG, "onItemClick: +++++++++++++++");
         Intent detailIntent = new Intent(this, DetailActivity.class);
 
         detailIntent.putExtra(EXTRA_IMAGE, apod.getApodImage());
