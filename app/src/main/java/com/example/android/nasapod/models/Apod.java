@@ -1,4 +1,4 @@
-package com.example.android.nasapod;
+package com.example.android.nasapod.models;
 
 import com.google.gson.annotations.SerializedName;
 

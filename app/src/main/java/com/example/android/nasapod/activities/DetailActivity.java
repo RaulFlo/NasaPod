@@ -1,4 +1,4 @@
-package com.example.android.nasapod;
+package com.example.android.nasapod.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,10 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.android.nasapod.R;
 
-import static com.example.android.nasapod.MainActivity.EXTRA_IMAGE;
-import static com.example.android.nasapod.MainActivity.EXTRA_TITLE;
-import static com.example.android.nasapod.MainActivity.EXTRA_DATE;
+import static com.example.android.nasapod.activities.MainActivity.EXTRA_IMAGE;
+import static com.example.android.nasapod.activities.MainActivity.EXTRA_TITLE;
+import static com.example.android.nasapod.activities.MainActivity.EXTRA_DATE;
 
 public class DetailActivity extends AppCompatActivity {
 

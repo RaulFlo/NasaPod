@@ -1,4 +1,4 @@
-package com.example.android.nasapod;
+package com.example.android.nasapod.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -6,11 +6,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
-import org.json.JSONObject;
+import com.example.android.nasapod.R;
+import com.example.android.nasapod.activities.DetailActivity;
+import com.example.android.nasapod.adapter.ApodAdapter;
+import com.example.android.nasapod.models.Apod;
+import com.example.android.nasapod.repo.ApodRepo;
+import com.example.android.nasapod.repo.FakeApodRepo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ApodAdapter.AdapterListener {
