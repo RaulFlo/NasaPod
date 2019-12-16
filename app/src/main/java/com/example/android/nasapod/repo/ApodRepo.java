@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface ApodRepo {
-    Apod getPicOfTheDay() throws IOException;
+    Apod getPicOfTheDay();
 
-    List<Apod> getListPicOfTheDay() throws IOException;
+    List<Apod> getListPicOfTheDay();
 }

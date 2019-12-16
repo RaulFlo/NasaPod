@@ -11,7 +11,7 @@ import retrofit2.http.Query;
 
 public interface GetDataService {
 
-    @GET("/planetary/apod")
+    @GET("/planetary/apod?api_key=TITYeODKg1B84Xo8Lcg6Bn0hJCHnGDtSEqrqt4e8")
     Call<Apod> getApods(
             @Query("date") String date);
 }

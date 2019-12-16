@@ -27,23 +27,33 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitRepo implements ApodRepo {
 
     @Override
-    public Apod getPicOfTheDay() throws IOException {
+    public Apod getPicOfTheDay() {
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<Apod> call = service.getApods(null);
 
-        Apod apod = call.execute().body();
+        Apod apod = null;
+        try {
+            apod = call.execute().body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return apod;
 
     }
 
     @Override
-    public List<Apod> getListPicOfTheDay() throws IOException {
+    public List<Apod> getListPicOfTheDay(){
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<Apod> call = service.getApods("2019-12-15");
 
 
+        Apod apod = null;
+        try {
+            apod = call.execute().body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        Apod apod = call.execute().body();
         List<Apod> listOfApods = new ArrayList<>();
         listOfApods.add(apod);
 
