@@ -24,34 +24,41 @@ public class RetrofitRepo implements ApodRepo {
     @Override
     public Apod getPicOfTheDay(LocalDate date) {
 
+        return makeCall(date);
 
-            GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-            Call<Apod> call = service.getApods(null);
-
-            Apod apod = null;
-            try {
-                apod = call.execute().body();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return apod;
     }
-
 
 
     @Override
     public List<Apod> getListPicOfTheDay(LocalDate start, LocalDate end) {
+
+        Apod apod = makeCall(start);
+        Apod apod2 = makeCall(end);
+
+        List<Apod> listOfApods = new ArrayList<>();
+
+        if (apod != null) {
+            listOfApods.add(apod);
+        }
+        if (apod2 != null) {
+            listOfApods.add(apod2);
+        }
+
+        return listOfApods;
+    }
+
+
+
+    private Apod makeCall(LocalDate date) {
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
 
         DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd");
 
-
-        Call<Apod>  call = service.getApods(start.toString(dtf));
-
+        Call<Apod> call = service.getApods(date.toString(dtf));
         Apod apod = null;
         try {
             Response<Apod> response = call.execute();
-            if(response.isSuccessful()) {
+            if (response.isSuccessful()) {
                 apod = response.body();
             } else {
                 Log.d("RetrofitRepo", "Response not successful");
@@ -63,12 +70,7 @@ public class RetrofitRepo implements ApodRepo {
         }
 
 
-        List<Apod> listOfApods = new ArrayList<>();
+        return apod;
 
-        if (apod != null) {
-            listOfApods.add(apod);
-        }
-
-        return listOfApods;
     }
 }

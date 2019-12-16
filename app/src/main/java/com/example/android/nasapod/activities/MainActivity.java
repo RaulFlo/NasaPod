@@ -44,12 +44,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         //set to LinearLayout default vertical
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-//        //fake Apod repo get data
-//        ApodRepo fakeApodRepo = new FakeApodRepo();
-//        //create a new List that we fill with our data
-//        mApodList = fakeApodRepo.getListPicOfTheDay();
-//        mApodAdapter = new ApodAdapter(mApodList, this);
-//        mRecyclerView.setAdapter(mApodAdapter);
+
 
         ApodRepo retrofitRepo = new RetrofitRepo();
 
