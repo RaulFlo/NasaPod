@@ -7,12 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.android.nasapod.GetListPicOfTheDayAsyncTask;
 import com.example.android.nasapod.R;
 import com.example.android.nasapod.activities.DetailActivity;
 import com.example.android.nasapod.adapter.ApodAdapter;
 import com.example.android.nasapod.models.Apod;
 import com.example.android.nasapod.repo.ApodRepo;
 import com.example.android.nasapod.repo.FakeApodRepo;
+import com.example.android.nasapod.repo.RetrofitRepo;
 
 import java.util.List;
 
@@ -43,13 +45,18 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-        ApodRepo fakeApodRepo = new FakeApodRepo();
-        //create a new List that we fill with our data
-        mApodList = fakeApodRepo.getListPicOfTheDay();
 
+        ApodRepo retrofitRepo = new RetrofitRepo();
 
-        mApodAdapter = new ApodAdapter(mApodList, this);
-        mRecyclerView.setAdapter(mApodAdapter);
+        new GetListPicOfTheDayAsyncTask(new GetListPicOfTheDayAsyncTask.Listener() {
+            @Override
+            public void onApodsReturned(List<Apod> apods) {
+                mApodList = apods;
+                mApodAdapter = new ApodAdapter(mApodList, MainActivity.this);
+                mRecyclerView.setAdapter(mApodAdapter);
+            }
+        }).execute(retrofitRepo);
+
     }
 
 
