@@ -2,6 +2,8 @@ package com.example.android.nasapod.repo;
 
 
 
+import android.util.Log;
+
 import com.example.android.nasapod.GetDataService;
 import com.example.android.nasapod.RetrofitClientInstance;
 import com.example.android.nasapod.models.Apod;
@@ -52,10 +54,13 @@ public class RetrofitRepo implements ApodRepo {
             apod = call.execute().body();
         } catch (IOException e) {
             e.printStackTrace();
+            Log.d("===============", "getListPicOfTheDay: ");
         }
 
         List<Apod> listOfApods = new ArrayList<>();
-        listOfApods.add(apod);
+        if(apod != null) {
+            listOfApods.add(apod);
+        }
 
         return listOfApods;
     }
