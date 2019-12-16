@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
 //        ApodRepo fakeApodRepo = new FakeApodRepo();
 //        //create a new List that we fill with our data
 //        mApodList = fakeApodRepo.getListPicOfTheDay();
+//        mApodAdapter = new ApodAdapter(mApodList, this);
+//        mRecyclerView.setAdapter(mApodAdapter);
 
         ApodRepo retrofitRepo = new RetrofitRepo();
 
@@ -55,15 +57,11 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
             @Override
             public void onApodsReturned(List<Apod> apods) {
                 mApodList = apods;
-                mApodAdapter = new ApodAdapter(mApodList,MainActivity.this);
+                mApodAdapter = new ApodAdapter(mApodList, MainActivity.this);
                 mRecyclerView.setAdapter(mApodAdapter);
             }
         }).execute(retrofitRepo);
 
-
-
-//        mApodAdapter = new ApodAdapter(mApodList, this);
-//        mRecyclerView.setAdapter(mApodAdapter);
     }
 
 

@@ -2,6 +2,8 @@ package com.example.android.nasapod;
 
 import com.example.android.nasapod.models.Apod;
 
+import org.joda.time.LocalDate;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -14,5 +16,5 @@ public interface GetDataService {
 
     @GET("/planetary/apod?api_key=TITYeODKg1B84Xo8Lcg6Bn0hJCHnGDtSEqrqt4e8")
     Call<Apod> getApods(
-            @Query("date") List<String> date);
+            @Query("date") String date);
 }
