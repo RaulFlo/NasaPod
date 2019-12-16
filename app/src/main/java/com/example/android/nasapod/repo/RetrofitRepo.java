@@ -1,7 +1,6 @@
 package com.example.android.nasapod.repo;
 
 
-
 import android.util.Log;
 
 import com.example.android.nasapod.GetDataService;
@@ -44,10 +43,11 @@ public class RetrofitRepo implements ApodRepo {
     }
 
     @Override
-    public List<Apod> getListPicOfTheDay(){
+    public List<Apod> getListPicOfTheDay() {
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<Apod> call = service.getApods("2019-12-15");
-
+        Call<Apod> call2 = service.getApods("2019-12-14");
+        Call<Apod> call3 = service.getApods("2019-12-13");
 
         Apod apod = null;
         try {
@@ -57,10 +57,34 @@ public class RetrofitRepo implements ApodRepo {
             Log.d("===============", "getListPicOfTheDay: ");
         }
 
+        Apod apod2 = null;
+        try {
+            apod2 = call2.execute().body();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.d("===============", "getListPicOfTheDay: ");
+        }
+
+        Apod apod3 = null;
+        try {
+            apod3 = call3.execute().body();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.d("===============", "getListPicOfTheDay: ");
+        }
+
         List<Apod> listOfApods = new ArrayList<>();
-        if(apod != null) {
+
+        if (apod != null) {
             listOfApods.add(apod);
         }
+        if (apod2 != null) {
+            listOfApods.add(apod2);
+        }
+        if (apod3 != null) {
+            listOfApods.add(apod3);
+        }
+
 
         return listOfApods;
     }
