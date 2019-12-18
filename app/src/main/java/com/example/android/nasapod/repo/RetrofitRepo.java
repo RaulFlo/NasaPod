@@ -35,16 +35,15 @@ public class RetrofitRepo implements ApodRepo {
 
         List<Apod> listOfApods = new ArrayList<>();
 
-        for(LocalDate currentDate = start; currentDate.isBefore(end); currentDate = currentDate.plusDays(1)){
+        for (LocalDate currentDate = start; currentDate.isBefore(end); currentDate = currentDate.plusDays(1)) {
             Apod apod = makeCall(currentDate);
-            if(apod != null){
+            if (apod != null) {
                 listOfApods.add(apod);
             }
         }
 
         return listOfApods;
     }
-
 
 
     private Apod makeCall(LocalDate date) {
