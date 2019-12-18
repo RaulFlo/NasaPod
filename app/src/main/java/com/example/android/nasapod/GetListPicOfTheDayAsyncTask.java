@@ -13,7 +13,7 @@ import java.util.List;
 public class GetListPicOfTheDayAsyncTask extends AsyncTask<ApodRepo, Integer, List<Apod>> {
 
     public interface Listener {
-       void onApodsReturned(List<Apod> apods);
+        void onApodsReturned(List<Apod> apods);
     }
 
     private Listener mListener;
@@ -23,11 +23,11 @@ public class GetListPicOfTheDayAsyncTask extends AsyncTask<ApodRepo, Integer, Li
     }
 
     LocalDate yesterday = LocalDate.now().minusDays(1);
-    LocalDate threeDaysAgo = LocalDate.now().minusDays(3);
+    LocalDate sevenDaysAgo = LocalDate.now().minusDays(7);
 
     @Override
     protected List<Apod> doInBackground(ApodRepo... apodRepos) {
-        return apodRepos[0].getListPicOfTheDay(threeDaysAgo,yesterday);
+        return apodRepos[0].getListPicOfTheDay(sevenDaysAgo, yesterday);
     }
 
     @Override

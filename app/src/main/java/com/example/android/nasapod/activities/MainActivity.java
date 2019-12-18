@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-
         ApodRepo retrofitRepo = new RetrofitRepo();
 
         new GetListPicOfTheDayAsyncTask(new GetListPicOfTheDayAsyncTask.Listener() {

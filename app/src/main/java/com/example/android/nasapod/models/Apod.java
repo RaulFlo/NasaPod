@@ -12,7 +12,7 @@ public class Apod {
     private String mApodDate;
 
 
-    public Apod(String aPodImage, String aPodName, String aPodDate){
+    public Apod(String aPodImage, String aPodName, String aPodDate) {
 
         this.mApodImage = aPodImage;
         this.mApodName = aPodName;

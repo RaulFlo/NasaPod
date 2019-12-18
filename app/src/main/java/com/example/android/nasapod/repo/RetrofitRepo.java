@@ -32,21 +32,18 @@ public class RetrofitRepo implements ApodRepo {
     @Override
     public List<Apod> getListPicOfTheDay(LocalDate start, LocalDate end) {
 
-        Apod apod = makeCall(start);
-        Apod apod2 = makeCall(end);
 
         List<Apod> listOfApods = new ArrayList<>();
 
-        if (apod != null) {
-            listOfApods.add(apod);
-        }
-        if (apod2 != null) {
-            listOfApods.add(apod2);
+        for (LocalDate currentDate = start; currentDate.isBefore(end); currentDate = currentDate.plusDays(1)) {
+            Apod apod = makeCall(currentDate);
+            if (apod != null) {
+                listOfApods.add(apod);
+            }
         }
 
         return listOfApods;
     }
-
 
 
     private Apod makeCall(LocalDate date) {
