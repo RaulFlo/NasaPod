@@ -9,10 +9,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.android.nasapod.R;
+import com.example.android.nasapod.models.Apod;
 
-import static com.example.android.nasapod.activities.MainActivity.EXTRA_IMAGE;
-import static com.example.android.nasapod.activities.MainActivity.EXTRA_TITLE;
-import static com.example.android.nasapod.activities.MainActivity.EXTRA_DATE;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -21,11 +19,13 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        Intent intent = getIntent();
 
-        String imageExtra = intent.getStringExtra(EXTRA_IMAGE);
-        String titleExtra = intent.getStringExtra(EXTRA_TITLE);
-        String dateExtra = intent.getStringExtra(EXTRA_DATE);
+        Intent intent = getIntent();
+        Apod apod = intent.getParcelableExtra("Apod");
+
+        String imageExtra = apod.getApodImage();
+        String titleExtra = apod.getApodName();
+        String dateExtra = apod.getApodDate();
 
         //LINK TO VIEW
         ImageView imageView = findViewById(R.id.image_view_detail);
