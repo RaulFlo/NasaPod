@@ -20,10 +20,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ApodAdapter.AdapterListener {
 
-    public static final String EXTRA_IMAGE = "image";
-    public static final String EXTRA_TITLE = "title";
-    public static final String EXTRA_DATE = "date";
-
     private static final String TAG = "MainActivity";
 
 
@@ -62,11 +58,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
     @Override
     public void onItemClick(Apod apod) {
         Intent detailIntent = new Intent(this, DetailActivity.class);
-
-        detailIntent.putExtra(EXTRA_IMAGE, apod.getApodImage());
-        detailIntent.putExtra(EXTRA_TITLE, apod.getApodName());
-        detailIntent.putExtra(EXTRA_DATE, apod.getApodDate());
-
+        detailIntent.putExtra("Apod", apod);
         startActivity(detailIntent);
     }
 }
