@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.Calendar;
+import java.util.Date;
 
 
 public class DatePickerFragment extends DialogFragment {
@@ -29,6 +30,14 @@ public class DatePickerFragment extends DialogFragment {
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
-        return new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener)getActivity(),year,month,day);
+
+
+        DatePickerDialog dialog = new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener)getActivity(),year,month,day);
+        //min and max for calendar
+        c.add(Calendar.YEAR, -5);
+        dialog.getDatePicker().setMinDate(c.getTimeInMillis());
+        dialog.getDatePicker().setMaxDate(new Date().getTime());
+        return dialog;
+
     }
 }

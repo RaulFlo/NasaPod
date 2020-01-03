@@ -100,6 +100,8 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+
+        datePicker.setMaxDate(c.getTimeInMillis());
         String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
 
 
