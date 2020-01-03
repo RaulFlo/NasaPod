@@ -1,12 +1,20 @@
 package com.example.android.nasapod.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.DatePicker;
 
+import com.example.android.nasapod.DatePickerFragment;
 import com.example.android.nasapod.GetListPicOfTheDayAsyncTask;
 import com.example.android.nasapod.R;
 import com.example.android.nasapod.activities.DetailActivity;
@@ -16,9 +24,11 @@ import com.example.android.nasapod.repo.ApodRepo;
 import com.example.android.nasapod.repo.FakeApodRepo;
 import com.example.android.nasapod.repo.RetrofitRepo;
 
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements ApodAdapter.AdapterListener {
+public class MainActivity extends AppCompatActivity implements ApodAdapter.AdapterListener, DatePickerDialog.OnDateSetListener {
 
     private static final String TAG = "MainActivity";
 
@@ -60,5 +70,38 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         Intent detailIntent = new Intent(this, DetailActivity.class);
         detailIntent.putExtra("Apod", apod);
         startActivity(detailIntent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.date_picker_menu_item:
+               DialogFragment datePicker = new DatePickerFragment();
+               datePicker.show(getSupportFragmentManager(),"date picker");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+
+
     }
 }
