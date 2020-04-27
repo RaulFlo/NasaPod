@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/black"
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -23,15 +24,16 @@
             android:id="@+id/text_view_titleName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title"
-            android:textColor="@android:color/black"
+            android:text="@string/title"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/text_view_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date: " />
+            android:text="@string/date"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
