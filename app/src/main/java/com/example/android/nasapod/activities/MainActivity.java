@@ -17,6 +17,7 @@ import android.widget.DatePicker;
 import com.example.android.nasapod.DatePickerFragment;
 import com.example.android.nasapod.GetListPicOfTheDayAsyncTask;
 import com.example.android.nasapod.R;
+import com.example.android.nasapod.ThemeDialog;
 import com.example.android.nasapod.activities.DetailActivity;
 import com.example.android.nasapod.adapter.ApodAdapter;
 import com.example.android.nasapod.models.Apod;
@@ -87,6 +88,9 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
                DialogFragment datePicker = new DatePickerFragment();
                datePicker.show(getSupportFragmentManager(),"date picker");
                 return true;
+
+            case R.id.theme_menu_item:
+                openThemeDialog();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -104,6 +108,12 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         datePicker.setMaxDate(c.getTimeInMillis());
         String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
 
+
+    }
+
+    private void openThemeDialog() {
+        ThemeDialog tDialog = new ThemeDialog();
+        tDialog.show(getSupportFragmentManager(), "theme dialog");
 
     }
 }

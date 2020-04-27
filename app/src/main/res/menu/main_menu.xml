@@ -8,4 +8,10 @@
         app:showAsAction="ifRoom"
         />
 
+    <item
+        android:id="@+id/theme_menu_item"
+        app:showAsAction="never"
+        android:title="@string/theme"
+        />
+
 </menu>
