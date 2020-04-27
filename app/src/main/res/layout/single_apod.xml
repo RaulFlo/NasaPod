@@ -18,6 +18,7 @@
             android:id="@+id/image_view_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:contentDescription="@string/nasa_image"
             android:src="@mipmap/ic_launcher" />
 
         <TextView
