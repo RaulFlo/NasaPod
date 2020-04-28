@@ -7,7 +7,7 @@ public class SharedPref {
     SharedPreferences mySharedPref;
 
     public SharedPref (Context context){
-        mySharedPref = context.getSharedPreferences("filename", Context.MODE_PRIVATE);
+        mySharedPref = context.getSharedPreferences("sharedPrefFile", Context.MODE_PRIVATE);
     }
 
     //method will save the nightMode state : true or false

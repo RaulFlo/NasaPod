@@ -23,6 +23,7 @@ import com.example.android.nasapod.DatePickerFragment;
 import com.example.android.nasapod.GetCurrentDateMinus7DaysAsyncTask;
 import com.example.android.nasapod.R;
 
+import com.example.android.nasapod.SharedPref;
 import com.example.android.nasapod.adapter.ApodAdapter;
 import com.example.android.nasapod.models.Apod;
 import com.example.android.nasapod.repo.ApodRepo;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
     private RecyclerView mRecyclerView;
     private ApodAdapter mApodAdapter;
     private List<Apod> mApodList;
+    SharedPref sharedPref;
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -54,6 +56,13 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPref = new SharedPref(this);
+        if(sharedPref.loadNightModeState() == true){
+            setTheme(R.style.darkTheme);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
