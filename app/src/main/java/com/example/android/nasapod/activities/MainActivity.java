@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
 
     private RecyclerView mRecyclerView;
     private ApodAdapter mApodAdapter;
-    private List<Apod> mApodList;
+
     SharedPref sharedPref;
 
     public static Intent newIntent(Context context) {
@@ -79,8 +79,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         new GetCurrentDateMinus7DaysAsyncTask(new GetCurrentDateMinus7DaysAsyncTask.Listener() {
             @Override
             public void onApodsReturned(List<Apod> apods) {
-                mApodList = apods;
-                mApodAdapter = new ApodAdapter(mApodList, MainActivity.this);
+                mApodAdapter = new ApodAdapter(apods, MainActivity.this);
                 mRecyclerView.setAdapter(mApodAdapter);
             }
         }).execute(new ApodRepoAndDate(retrofitRepo, LocalDate.now().minusDays(1)));
@@ -145,8 +144,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         new GetCurrentDateMinus7DaysAsyncTask(new GetCurrentDateMinus7DaysAsyncTask.Listener() {
             @Override
             public void onApodsReturned(List<Apod> apods) {
-                mApodList = apods;
-                mApodAdapter.updateData(mApodList);
+                mApodAdapter.updateData(apods);
             }
         }).execute(new ApodRepoAndDate(retrofitRepo, chosenDate));
 
