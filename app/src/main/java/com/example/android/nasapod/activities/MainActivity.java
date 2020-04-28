@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
                 mRecyclerView.setAdapter(mApodAdapter);
             }
         }).execute(retrofitRepo);
+
 
     }
 
