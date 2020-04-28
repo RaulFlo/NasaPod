@@ -2,13 +2,13 @@ package com.example.android.nasapod.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 
+import android.content.Context;
 import android.content.Intent;
 
 import android.os.Bundle;
@@ -22,7 +22,6 @@ import com.example.android.nasapod.ApodRepoAndDate;
 import com.example.android.nasapod.DatePickerFragment;
 import com.example.android.nasapod.GetCurrentDateMinus7DaysAsyncTask;
 import com.example.android.nasapod.R;
-import com.example.android.nasapod.ThemeDialog;
 
 import com.example.android.nasapod.adapter.ApodAdapter;
 import com.example.android.nasapod.models.Apod;
@@ -47,18 +46,16 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
     private ApodAdapter mApodAdapter;
     private List<Apod> mApodList;
 
+    public static Intent newIntent(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        return intent;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
-            setTheme(R.style.darkTheme);
-        }else {
-            setTheme(R.style.AppTheme);
-        }
-
 
         //link RecyclerView with xml RecyclerView in activity_main.xml
         mRecyclerView = findViewById(R.id.recycler_view);
@@ -106,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
                 return true;
 
             case R.id.theme_menu_item:
-                openThemeDialog();
+                startActivity(SetActivity.newIntent(MainActivity.this));
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -147,9 +144,4 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
 
     }
 
-    private void openThemeDialog() {
-        ThemeDialog tDialog = new ThemeDialog();
-        tDialog.show(getSupportFragmentManager(), "theme dialog");
-
-    }
 }

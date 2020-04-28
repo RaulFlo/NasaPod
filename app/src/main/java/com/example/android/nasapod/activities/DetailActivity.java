@@ -2,6 +2,7 @@ package com.example.android.nasapod.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -13,6 +14,11 @@ import com.example.android.nasapod.models.Apod;
 
 
 public class DetailActivity extends AppCompatActivity {
+
+    public static Intent newIntent(Context context) {
+        Intent intent = new Intent(context, DetailActivity.class);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
