@@ -7,4 +7,6 @@
     <string name="theme">Theme</string>
     <string name="light">Light</string>
     <string name="dark">Dark</string>
+    <string name="enable_dark_mode">Enable Dark Mode</string>
+    <string name="night_mode">Night Mode</string>
 </resources>

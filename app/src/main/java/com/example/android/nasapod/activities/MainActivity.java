@@ -2,6 +2,7 @@ package com.example.android.nasapod.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,6 +52,13 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.darkTheme);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
+
 
         //link RecyclerView with xml RecyclerView in activity_main.xml
         mRecyclerView = findViewById(R.id.recycler_view);
