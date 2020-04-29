@@ -6,12 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.nasapod.R;
 import com.example.android.nasapod.adapter.ApodViewHolder;
 import com.example.android.nasapod.models.Apod;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> implements ApodViewHolder.Listener {
@@ -28,6 +30,12 @@ public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> implements
     public ApodAdapter(List<Apod> apodList, AdapterListener listener) {
         mApodList = apodList;
         mListener = listener;
+    }
+
+    public void updateData(List<Apod> apods) {
+        mApodList.clear();
+        mApodList.addAll(apods);
+        notifyDataSetChanged();
     }
 
 

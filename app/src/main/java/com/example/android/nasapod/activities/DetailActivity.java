@@ -2,6 +2,7 @@ package com.example.android.nasapod.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -9,13 +10,27 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.android.nasapod.R;
+import com.example.android.nasapod.SharedPref;
 import com.example.android.nasapod.models.Apod;
 
 
 public class DetailActivity extends AppCompatActivity {
 
+    SharedPref sharedPref;
+
+    public static Intent newIntent(Context context) {
+        Intent intent = new Intent(context, DetailActivity.class);
+        return intent;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(sharedPref.loadNightModeState() == true){
+            setTheme(R.style.darkTheme);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 

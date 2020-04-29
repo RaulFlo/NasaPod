@@ -3,6 +3,8 @@ package com.example.android.nasapod.repo;
 
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatDelegate;
+
 import com.example.android.nasapod.GetDataService;
 import com.example.android.nasapod.RetrofitClientInstance;
 import com.example.android.nasapod.models.Apod;
@@ -44,6 +46,7 @@ public class RetrofitRepo implements ApodRepo {
 
         return listOfApods;
     }
+
 
 
     private Apod makeCall(LocalDate date) {

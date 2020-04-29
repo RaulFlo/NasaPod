@@ -10,7 +10,7 @@ import org.joda.time.LocalDate;
 
 import java.util.List;
 
-public class GetListPicOfTheDayAsyncTask extends AsyncTask<ApodRepo, Integer, List<Apod>> {
+public class GetCurrentDateMinus7DaysAsyncTask extends AsyncTask<ApodRepoAndDate, Integer, List<Apod>> {
 
     public interface Listener {
         void onApodsReturned(List<Apod> apods);
@@ -18,17 +18,19 @@ public class GetListPicOfTheDayAsyncTask extends AsyncTask<ApodRepo, Integer, Li
 
     private Listener mListener;
 
-    public GetListPicOfTheDayAsyncTask(Listener listener) {
+
+    public GetCurrentDateMinus7DaysAsyncTask(Listener listener) {
         mListener = listener;
     }
 
-    LocalDate yesterday = LocalDate.now().minusDays(1);
-    LocalDate sevenDaysAgo = LocalDate.now().minusDays(7);
 
     @Override
-    protected List<Apod> doInBackground(ApodRepo... apodRepos) {
-        return apodRepos[0].getListPicOfTheDay(sevenDaysAgo, yesterday);
+    protected List<Apod> doInBackground(ApodRepoAndDate... apodRepoAndDates) {
+        ApodRepoAndDate apodRepoAndDate = apodRepoAndDates[0];
+        LocalDate dateRequested = apodRepoAndDate.mDate.plusDays(1);
+        return apodRepoAndDate.mApodRepo.getListPicOfTheDay(dateRequested.minusDays(7),dateRequested);
     }
+
 
     @Override
     protected void onPostExecute(List<Apod> apods) {

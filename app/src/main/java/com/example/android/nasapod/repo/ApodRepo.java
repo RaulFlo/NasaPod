@@ -11,4 +11,5 @@ public interface ApodRepo {
     Apod getPicOfTheDay(LocalDate date);
 
     List<Apod> getListPicOfTheDay(LocalDate start, LocalDate end);
+
 }
