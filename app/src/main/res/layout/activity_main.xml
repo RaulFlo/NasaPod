@@ -7,31 +7,17 @@
     tools:context=".activities.MainActivity">
 
 
-<<<<<<< HEAD
 
-
-||||||| merged common ancestors
-
-=======
->>>>>>> master
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-<<<<<<< HEAD
-
-       />
-
-
-
-||||||| merged common ancestors
         android:background="@android:color/darker_gray"/>
 
 
 
-=======
-        android:background="@android:color/white" />
->>>>>>> master
+
+
 
 
 </RelativeLayout>
