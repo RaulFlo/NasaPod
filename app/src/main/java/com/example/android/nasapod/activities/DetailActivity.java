@@ -25,6 +25,7 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPref = new SharedPref(this);
         if(sharedPref.loadNightModeState() == true){
             setTheme(R.style.darkTheme);
         }else {
