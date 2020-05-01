@@ -55,16 +55,14 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onStart() {
         sharedPref = new SharedPref(this);
         if(sharedPref.loadNightModeState() == true){
             setTheme(R.style.darkTheme);
         }else {
             setTheme(R.style.AppTheme);
         }
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        super.onStart();
 
         //link RecyclerView with xml RecyclerView in activity_main.xml
         mRecyclerView = findViewById(R.id.recycler_view);
@@ -83,6 +81,20 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
                 mRecyclerView.setAdapter(mApodAdapter);
             }
         }).execute(new ApodRepoAndDate(retrofitRepo, LocalDate.now().minusDays(1)));
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        sharedPref = new SharedPref(this);
+        if(sharedPref.loadNightModeState() == true){
+            setTheme(R.style.darkTheme);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
     }
 
