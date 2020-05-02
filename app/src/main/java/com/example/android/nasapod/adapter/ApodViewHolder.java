@@ -69,8 +69,8 @@ public class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
 
                 int color = 0;
-                int darkMutedColor = palette.getDarkMutedColor(color);
-                mImageView.setBackgroundColor(darkMutedColor);
+                int dominantColor = palette.getDominantColor(color);
+                mImageView.setBackgroundColor(dominantColor);
 
             }
 
