@@ -2,7 +2,10 @@ package com.example.android.nasapod.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -10,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.palette.graphics.Palette;
@@ -36,6 +40,7 @@ public class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     public TextView mDate;
     public Listener mListener;
     public CardView mContainer;
+    Context mContext;
 
 
     public ApodViewHolder(@NonNull View itemView, Listener listener) {
@@ -65,12 +70,8 @@ public class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
             public void onResourceReady(@NonNull Bitmap resource, Transition<? super Bitmap> transition) {
                 // you now have a bitmap
                 mImageView.setImageBitmap(resource);
-                Palette palette = createPaletteSync(resource);
+                createPaletteAsync(resource);
 
-
-                int color = 0;
-                int dominantColor = palette.getDominantColor(color);
-                mImageView.setBackgroundColor(dominantColor);
 
             }
 
@@ -98,10 +99,25 @@ public class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     }
 
 
-    // Generate palette synchronously and return it
-    public Palette createPaletteSync(Bitmap bitmap) {
-        Palette p = Palette.from(bitmap).generate();
-        return p;
+    // Generate palette asynchronously and use it on a different
+// thread using onGenerated()
+    public void createPaletteAsync(Bitmap bitmap) {
+        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            public void onGenerated(Palette palette) {
+                // Use generated instance
+
+                int color = 0;
+                int dominantColor = palette.getDominantColor(color);
+                int cardColor = 0;
+                int darkMutedColor = palette.getDarkMutedColor(cardColor);
+
+
+                mImageView.setBackgroundColor(dominantColor);
+                mContainer.setBackgroundColor(darkMutedColor);
+
+            }
+        });
     }
 }
 
