@@ -1,6 +1,7 @@
 package com.example.android.nasapod.adapter;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -8,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,7 +24,7 @@ public class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private static final String TAG = "ApodViewHolder";
 
     interface Listener {
-        void onItemClick(int adapterPosition);
+        void onItemClick(int adapterPosition, ImageView imageViewClicked);
     }
 
     public ImageView mImageView;
@@ -36,7 +38,7 @@ public class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         super(itemView);
 
 
-       mContainer = itemView.findViewById(R.id.container);
+        mContainer = itemView.findViewById(R.id.container);
         mListener = listener;
         mImageView = itemView.findViewById(R.id.image_view_image);
         mTitleName = itemView.findViewById(R.id.text_view_titleName);
@@ -47,17 +49,16 @@ public class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void bind(Apod anApod) {
-
         mContainer.setAnimation(AnimationUtils.loadAnimation(MyApp.getAppContext(),R.anim.fade_transition_animation));
-
         String imageUrl = anApod.getApodImage();
         //Glide for ImageView
         Glide.with(itemView.getContext()).load(imageUrl).fitCenter().into(mImageView);
         mTitleName.setText(anApod.getApodName());
         mDate.setText(anApod.getApodDate());
-
-
+        // TODO: make string resource with argument for apodName
+        mImageView.setTransitionName(anApod.getApodName() + "_transition");
     }
 
 
@@ -66,7 +67,7 @@ public class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         if (mListener != null) {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
-                mListener.onItemClick(position);
+                mListener.onItemClick(position, mImageView);
             }
         }
     }

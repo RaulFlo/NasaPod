@@ -6,6 +6,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ActivityOptions;
 import android.app.DatePickerDialog;
 
 import android.content.Context;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.DatePicker;
 
 import com.example.android.nasapod.ApodRepoAndDate;
@@ -58,24 +60,6 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
     protected void onStart() {
         checkForThemeChange();
         super.onStart();
-
-        //link RecyclerView with xml RecyclerView in activity_main.xml
-        mRecyclerView = findViewById(R.id.recycler_view);
-        //if you know its not going to change in size
-        mRecyclerView.setHasFixedSize(true);
-        //set to LinearLayout default vertical
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-        ApodRepo retrofitRepo = new RetrofitRepo();
-
-        new GetCurrentDateMinus7DaysAsyncTask(new GetCurrentDateMinus7DaysAsyncTask.Listener() {
-            @Override
-            public void onApodsReturned(List<Apod> apods) {
-                mApodAdapter = new ApodAdapter(apods, MainActivity.this);
-                mRecyclerView.setAdapter(mApodAdapter);
-            }
-        }).execute(new ApodRepoAndDate(retrofitRepo, LocalDate.now().minusDays(1)));
     }
 
 
@@ -85,14 +69,34 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ApodRepo retrofitRepo = new RetrofitRepo();
+
+        //link RecyclerView with xml RecyclerView in activity_main.xml
+        mRecyclerView = findViewById(R.id.recycler_view);
+        //if you know its not going to change in size
+        mRecyclerView.setHasFixedSize(true);
+        //set to LinearLayout default vertical
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        new GetCurrentDateMinus7DaysAsyncTask(new GetCurrentDateMinus7DaysAsyncTask.Listener() {
+            @Override
+            public void onApodsReturned(List<Apod> apods) {
+                mApodAdapter = new ApodAdapter(apods, MainActivity.this);
+                mRecyclerView.setAdapter(mApodAdapter);
+            }
+        }).execute(new ApodRepoAndDate(retrofitRepo, LocalDate.now().minusDays(1)));
+
     }
 
-
     @Override
-    public void onItemClick(Apod apod) {
+    public void onItemClick(Apod apod, View view) {
+        // FIXME: this should be done in DetailActivity.newIntent(apod, view)
         Intent detailIntent = new Intent(this, DetailActivity.class);
         detailIntent.putExtra("Apod", apod);
-        startActivity(detailIntent);
+        detailIntent.putExtra("ApodTransitionName", view.getTransitionName());
+
+        ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, view, view.getTransitionName());
+        startActivity(detailIntent, transitionActivityOptions.toBundle());
     }
 
     @Override
@@ -108,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
 
             case R.id.date_picker_menu_item:
                 DialogFragment datePicker = new DatePickerFragment();
-                datePicker.show(getSupportFragmentManager(), "date picker");
+                datePicker.show(getSupportFragmentManager(), "date picker"); // FIXME: MAKE GLOBAL CONSTANT IN THIS CLASS
                 return true;
 
             case R.id.theme_menu_item:
@@ -116,12 +120,11 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
             default:
                 return super.onOptionsItemSelected(item);
         }
-
-
     }
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+        // fixme: REMOVE LOGGING
         Calendar c = Calendar.getInstance();
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);

@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
@@ -19,7 +20,7 @@ import java.util.List;
 public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> implements ApodViewHolder.Listener {
 
     public interface AdapterListener {
-        void onItemClick(Apod apod);
+        void onItemClick(Apod apod, View view);
     }
 
     private static final String TAG = "ApodAdapter";
@@ -66,8 +67,8 @@ public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> implements
 
 
     @Override
-    public void onItemClick(int adapterPosition) {
+    public void onItemClick(int adapterPosition, ImageView imageViewClicked) {
         Apod apod = mApodList.get(adapterPosition);
-        mListener.onItemClick(apod);
+        mListener.onItemClick(apod, imageViewClicked);
     }
 }
