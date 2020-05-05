@@ -42,8 +42,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
     SharedPref sharedPref;
 
     public static Intent newIntent(Context context) {
-        Intent intent = new Intent(context, MainActivity.class);
-        return intent;
+        return new Intent(context, MainActivity.class);
     }
 
 
@@ -118,13 +117,13 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
                                                        int dayStart, int yearEnd,
                                                        int monthEnd, int dayEnd) {
                                 // grab the date range, do what you want
-
+                                //convert int days to LocalDate add one on months
                                 java.time.LocalDate startDay = java.time.LocalDate.of(yearStart, monthStart +1, dayStart);
                                 java.time.LocalDate endDay = java.time.LocalDate.of(yearEnd, monthEnd+1, dayEnd);
-
+                                //convert LocalDate to string
                                 String startingDay = String.valueOf(startDay);
                                 String endingDay = String.valueOf(endDay);
-
+                                //convert String to LocalDate joda
                                 LocalDate sDay = LocalDate.parse(startingDay);
                                 LocalDate eDay = LocalDate.parse(endingDay);
 
@@ -140,11 +139,11 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
                             }
                         }, year, month, day);
                 smoothDateRangePickerFragment.setMaxDate(Calendar.getInstance());
+                //set the max years back
                 c.add(Calendar.YEAR, -5);
                 smoothDateRangePickerFragment.setMinDate(c);
-
+                //show fragment
                 smoothDateRangePickerFragment.show(getFragmentManager(), "smoothDateRangePicker");
-
 
                 return true;
 
