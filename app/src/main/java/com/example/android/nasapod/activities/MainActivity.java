@@ -102,49 +102,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
 
         switch (item.getItemId()) {
             case R.id.date_picker_menu_item:
-
-                Calendar c = Calendar.getInstance();
-                int year = c.get(Calendar.YEAR);
-                int month = c.get(Calendar.MONTH);
-                int day = c.get(Calendar.DAY_OF_MONTH);
-
-                SmoothDateRangePickerFragment smoothDateRangePickerFragment = SmoothDateRangePickerFragment.newInstance(
-                        new SmoothDateRangePickerFragment.OnDateRangeSetListener() {
-                            @RequiresApi(api = Build.VERSION_CODES.O)
-                            @Override
-                            public void onDateRangeSet(SmoothDateRangePickerFragment view,
-                                                       int yearStart, int monthStart,
-                                                       int dayStart, int yearEnd,
-                                                       int monthEnd, int dayEnd) {
-                                // grab the date range, do what you want
-                                //convert int days to LocalDate add one on months
-                                java.time.LocalDate startDay = java.time.LocalDate.of(yearStart, monthStart +1, dayStart);
-                                java.time.LocalDate endDay = java.time.LocalDate.of(yearEnd, monthEnd+1, dayEnd);
-                                //convert LocalDate to string
-                                String startingDay = String.valueOf(startDay);
-                                String endingDay = String.valueOf(endDay);
-                                //convert String to LocalDate joda
-                                LocalDate sDay = LocalDate.parse(startingDay);
-                                LocalDate eDay = LocalDate.parse(endingDay);
-
-
-                                ApodRepo retrofitRepo = new RetrofitRepo();
-                                new GetListPicOfTheDayAsyncTask(new GetListPicOfTheDayAsyncTask.Listener() {
-                                    @Override
-                                    public void onApodsReturned(List<Apod> apods) {
-                                        mApodAdapter.updateData(apods);
-                                    }
-                                }).execute(new ApodRepoAndDate(retrofitRepo, sDay, eDay));
-
-                            }
-                        }, year, month, day);
-                smoothDateRangePickerFragment.setMaxDate(Calendar.getInstance());
-                //set the max years back
-                c.add(Calendar.YEAR, -5);
-                smoothDateRangePickerFragment.setMinDate(c);
-                //show fragment
-                smoothDateRangePickerFragment.show(getFragmentManager(), "smoothDateRangePicker");
-
+               createDateRangePicker();
                 return true;
 
             case R.id.theme_menu_item:
@@ -164,6 +122,52 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         } else {
             setTheme(R.style.AppTheme);
         }
+    }
+
+    //method to create DateRanger picker using SmoothDateRangePicker
+    public void createDateRangePicker(){
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        SmoothDateRangePickerFragment smoothDateRangePickerFragment = SmoothDateRangePickerFragment.newInstance(
+                new SmoothDateRangePickerFragment.OnDateRangeSetListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
+                    @Override
+                    public void onDateRangeSet(SmoothDateRangePickerFragment view,
+                                               int yearStart, int monthStart,
+                                               int dayStart, int yearEnd,
+                                               int monthEnd, int dayEnd) {
+                        // grab the date range, do what you want
+                        //convert int days to LocalDate add one on months
+                        java.time.LocalDate startDay = java.time.LocalDate.of(yearStart, monthStart +1, dayStart);
+                        java.time.LocalDate endDay = java.time.LocalDate.of(yearEnd, monthEnd+1, dayEnd);
+                        //convert LocalDate to string
+                        String startingDay = String.valueOf(startDay);
+                        String endingDay = String.valueOf(endDay);
+                        //convert String to LocalDate joda
+                        LocalDate sDay = LocalDate.parse(startingDay);
+                        LocalDate eDay = LocalDate.parse(endingDay);
+
+
+                        ApodRepo retrofitRepo = new RetrofitRepo();
+                        new GetListPicOfTheDayAsyncTask(new GetListPicOfTheDayAsyncTask.Listener() {
+                            @Override
+                            public void onApodsReturned(List<Apod> apods) {
+                                mApodAdapter.updateData(apods);
+                            }
+                        }).execute(new ApodRepoAndDate(retrofitRepo, sDay, eDay));
+
+                    }
+                }, year, month, day);
+        smoothDateRangePickerFragment.setMaxDate(Calendar.getInstance());
+        //set the max years back
+        c.add(Calendar.YEAR, -5);
+        smoothDateRangePickerFragment.setMinDate(c);
+        //show fragment
+        smoothDateRangePickerFragment.show(getFragmentManager(), "smoothDateRangePicker");
+
     }
 
 
