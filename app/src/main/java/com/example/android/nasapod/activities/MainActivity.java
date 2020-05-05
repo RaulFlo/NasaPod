@@ -28,14 +28,13 @@ import com.example.android.nasapod.repo.RetrofitRepo;
 import com.leavjenn.smoothdaterangepicker.date.SmoothDateRangePickerFragment;
 
 
+import org.joda.time.LocalDate;
+
 import java.util.Calendar;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ApodAdapter.AdapterListener {
-
-    private static final String TAG = "MainActivity";
-
 
     private RecyclerView mRecyclerView;
     private ApodAdapter mApodAdapter;
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
                 mRecyclerView.setAdapter(mApodAdapter);
             }
         }).execute(new ApodRepoAndDate(retrofitRepo,
-                org.joda.time.LocalDate.now().minusDays(14),org.joda.time.LocalDate.now().minusDays(1)));
+                LocalDate.now().minusDays(7), LocalDate.now().minusDays(1)));
     }
 
 
@@ -120,14 +119,14 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
                                                        int monthEnd, int dayEnd) {
                                 // grab the date range, do what you want
 
-                                java.time.LocalDate startDay = java.time.LocalDate.of(yearStart, monthStart, dayStart);
-                                java.time.LocalDate endDay = java.time.LocalDate.of(yearEnd, monthEnd, dayEnd);
+                                java.time.LocalDate startDay = java.time.LocalDate.of(yearStart, monthStart +1, dayStart);
+                                java.time.LocalDate endDay = java.time.LocalDate.of(yearEnd, monthEnd+1, dayEnd);
 
                                 String startingDay = String.valueOf(startDay);
                                 String endingDay = String.valueOf(endDay);
 
-                                org.joda.time.LocalDate sDay = org.joda.time.LocalDate.parse(startingDay);
-                                org.joda.time.LocalDate eDay = org.joda.time.LocalDate.parse(endingDay);
+                                LocalDate sDay = LocalDate.parse(startingDay);
+                                LocalDate eDay = LocalDate.parse(endingDay);
 
 
                                 ApodRepo retrofitRepo = new RetrofitRepo();
@@ -161,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
 
     public void checkForThemeChange() {
         sharedPref = new SharedPref(this);
-        if (sharedPref.loadNightModeState() == true) {
+        if (sharedPref.loadNightModeState()) {
             setTheme(R.style.darkTheme);
         } else {
             setTheme(R.style.AppTheme);

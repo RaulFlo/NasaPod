@@ -1,7 +1,6 @@
 package com.example.android.nasapod.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,14 +17,13 @@ public class SetActivity extends AppCompatActivity {
     SharedPref sharedPref;
 
     public static Intent newIntent(Context context) {
-        Intent intent = new Intent(context, SetActivity.class);
-        return intent;
+        return new Intent(context, SetActivity.class);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPref = new SharedPref(this);
-        if(sharedPref.loadNightModeState() == true){
+        if(sharedPref.loadNightModeState()){
             setTheme(R.style.darkTheme);
         }else {
             setTheme(R.style.AppTheme);
@@ -35,9 +33,9 @@ public class SetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_set);
 
 
-        mSwitch = (Switch)findViewById(R.id.switch_theme);
+        mSwitch = findViewById(R.id.switch_theme);
 
-        if(sharedPref.loadNightModeState() == true){
+        if(sharedPref.loadNightModeState()){
             mSwitch.setChecked(true);
         }
 
