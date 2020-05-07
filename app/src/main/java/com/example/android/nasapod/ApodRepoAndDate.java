@@ -6,10 +6,14 @@ import org.joda.time.LocalDate;
 
 public class ApodRepoAndDate {
     public ApodRepo mApodRepo;
-    public LocalDate mDate;
+    public LocalDate mStartDate;
+    public LocalDate mEndDate;
 
-    public ApodRepoAndDate(ApodRepo apodRepo, LocalDate date) {
+
+    public ApodRepoAndDate(ApodRepo apodRepo, org.joda.time.LocalDate date, org.joda.time.LocalDate date2) {
         mApodRepo = apodRepo;
-        mDate = date;
+        mStartDate = date;
+        mEndDate = date2;
+
     }
 }
