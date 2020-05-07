@@ -8,7 +8,7 @@
         <item name="colorPrimaryDark">#fff</item>
         <item name="colorAccent">#05425E</item>
         <item name="backgroundColor">#A6A6A6</item>
-        <item name="textColor">#202020</item>
+        <item name="textColor">#B6B3B3</item>
         <item name="CardViewColor">#fff</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
@@ -23,7 +23,7 @@
         <item name="colorPrimaryDark">#101010</item>
         <item name="colorAccent">#05425E</item>
         <item name="backgroundColor">#101010</item>
-        <item name="textColor">#707070</item>
+        <item name="textColor">#B6B3B3</item>
         <item name="CardViewColor">#202020</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>

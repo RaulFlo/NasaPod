@@ -10,5 +10,6 @@
 
     <color name="primaryTextColor">#212121</color>
     <color name="primaryTextColorNight">#ffffff</color>
+    <color name="accent" />
 
 </resources>
