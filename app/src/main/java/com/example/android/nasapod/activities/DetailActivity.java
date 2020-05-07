@@ -19,14 +19,13 @@ public class DetailActivity extends AppCompatActivity {
     SharedPref sharedPref;
 
     public static Intent newIntent(Context context) {
-        Intent intent = new Intent(context, DetailActivity.class);
-        return intent;
+        return new Intent(context, DetailActivity.class);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPref = new SharedPref(this);
-        if(sharedPref.loadNightModeState() == true){
+        if(sharedPref.loadNightModeState()){
             setTheme(R.style.darkTheme);
         }else {
             setTheme(R.style.AppTheme);
