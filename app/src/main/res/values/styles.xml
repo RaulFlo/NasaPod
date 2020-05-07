@@ -10,6 +10,7 @@
         <item name="backgroundColor">#A6A6A6</item>
         <item name="textColor">#B6B3B3</item>
         <item name="CardViewColor">#fff</item>
+        <item name="android:windowContentTransitions">true</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
 
     </style>
@@ -24,6 +25,7 @@
         <item name="backgroundColor">#101010</item>
         <item name="textColor">#B6B3B3</item>
         <item name="CardViewColor">#202020</item>
+        <item name="android:windowContentTransitions">true</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
 
     </style>

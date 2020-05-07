@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ActivityOptions;
+import android.app.DatePickerDialog;
+
 import android.content.Context;
 import android.content.Intent;
 
@@ -14,6 +17,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.DatePicker;
 
 import com.example.android.nasapod.ApodRepoAndDate;
 import com.example.android.nasapod.GetListPicOfTheDayAsyncTask;
@@ -51,6 +56,16 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
     protected void onStart() {
         checkForThemeChange();
         super.onStart();
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        checkForThemeChange();
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        ApodRepo retrofitRepo = new RetrofitRepo();
 
         //link RecyclerView with xml RecyclerView in activity_main.xml
         mRecyclerView = findViewById(R.id.recycler_view);
@@ -58,10 +73,6 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         mRecyclerView.setHasFixedSize(true);
         //set to LinearLayout default vertical
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-        ApodRepo retrofitRepo = new RetrofitRepo();
-
 
         new GetListPicOfTheDayAsyncTask(new GetListPicOfTheDayAsyncTask.Listener() {
             @Override
@@ -73,21 +84,15 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
                 LocalDate.now().minusDays(7), LocalDate.now().minusDays(1)));
     }
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        checkForThemeChange();
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-    }
-
-
-    @Override
-    public void onItemClick(Apod apod) {
+    public void onItemClick(Apod apod, View view) {
+        // FIXME: this should be done in DetailActivity.newIntent(apod, view)
         Intent detailIntent = new Intent(this, DetailActivity.class);
         detailIntent.putExtra("Apod", apod);
-        startActivity(detailIntent);
+        detailIntent.putExtra("ApodTransitionName", view.getTransitionName());
+
+        ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, view, view.getTransitionName());
+        startActivity(detailIntent, transitionActivityOptions.toBundle());
     }
 
     @Override
@@ -102,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
 
         switch (item.getItemId()) {
             case R.id.date_picker_menu_item:
-               createDateRangePicker();
+                createDateRangePicker();
                 return true;
 
             case R.id.theme_menu_item:
@@ -110,10 +115,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
             default:
                 return super.onOptionsItemSelected(item);
         }
-
-
     }
-
 
     public void checkForThemeChange() {
         sharedPref = new SharedPref(this);
@@ -125,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
     }
 
     //method to create DateRanger picker using SmoothDateRangePicker
-    public void createDateRangePicker(){
+    public void createDateRangePicker() {
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
@@ -141,8 +143,8 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
                                                int monthEnd, int dayEnd) {
                         // grab the date range, do what you want
                         //convert int days to LocalDate add one on months
-                        java.time.LocalDate startDay = java.time.LocalDate.of(yearStart, monthStart +1, dayStart);
-                        java.time.LocalDate endDay = java.time.LocalDate.of(yearEnd, monthEnd+1, dayEnd);
+                        java.time.LocalDate startDay = java.time.LocalDate.of(yearStart, monthStart + 1, dayStart);
+                        java.time.LocalDate endDay = java.time.LocalDate.of(yearEnd, monthEnd + 1, dayEnd);
                         //convert LocalDate to string
                         String startingDay = String.valueOf(startDay);
                         String endingDay = String.valueOf(endDay);
@@ -169,7 +171,6 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         smoothDateRangePickerFragment.show(getFragmentManager(), "smoothDateRangePicker");
 
     }
-
 
 
 }

@@ -37,6 +37,7 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Apod apod = intent.getParcelableExtra("Apod");
+        String apodTransitionName = intent.getStringExtra("ApodTransitionName");
 
         String imageExtra = apod.getApodImage();
         String titleExtra = apod.getApodName();
@@ -44,6 +45,8 @@ public class DetailActivity extends AppCompatActivity {
 
         //LINK TO VIEW
         ImageView imageView = findViewById(R.id.image_view_detail);
+        // setting transition name to image detail view
+        imageView.setTransitionName(apodTransitionName);
         TextView textViewTitle = findViewById(R.id.text_view_title_detail);
         TextView textViewDate = findViewById(R.id.text_view_date_detail);
 

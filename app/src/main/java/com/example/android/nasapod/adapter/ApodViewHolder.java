@@ -1,5 +1,6 @@
 package com.example.android.nasapod.adapter;
 
+import android.content.Context;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -25,7 +26,7 @@ public class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
 
     interface Listener {
-        void onItemClick(int adapterPosition);
+        void onItemClick(int adapterPosition, ImageView imageViewClicked);
     }
 
     public ImageView mImageView;
@@ -50,8 +51,8 @@ public class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void bind(Apod anApod) {
-
         mContainer.setAnimation(AnimationUtils.loadAnimation(MyApp.getAppContext(), R.anim.fade_transition_animation));
 
         String imageUrl = anApod.getApodImage();
@@ -74,8 +75,8 @@ public class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
         mTitleName.setText(anApod.getApodName());
         mDate.setText(anApod.getApodDate());
-
-
+        // TODO: make string resource with argument for apodName
+        mImageView.setTransitionName(anApod.getApodName() + "_transition");
     }
 
 
@@ -84,7 +85,7 @@ public class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         if (mListener != null) {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
-                mListener.onItemClick(position);
+                mListener.onItemClick(position, mImageView);
             }
         }
     }
