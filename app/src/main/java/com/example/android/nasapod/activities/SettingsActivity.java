@@ -8,54 +8,46 @@ import android.os.Bundle;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
+import com.example.android.nasapod.MyApp;
 import com.example.android.nasapod.R;
 import com.example.android.nasapod.SharedPref;
 
-public class SetActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity {
 
-    private Switch mSwitch;
-    SharedPref sharedPref;
+    SharedPref sharedPref = new SharedPref(MyApp.getAppContext());
 
     public static Intent newIntent(Context context) {
-        return new Intent(context, SetActivity.class);
+        return new Intent(context, SettingsActivity.class);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        sharedPref = new SharedPref(this);
-        if(sharedPref.loadNightModeState()){
-            setTheme(R.style.darkTheme);
-        }else {
-            setTheme(R.style.AppTheme);
-        }
-
+        checkForThemeChange();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set);
 
-
-        mSwitch = findViewById(R.id.switch_theme);
-
-        if(sharedPref.loadNightModeState()){
-            mSwitch.setChecked(true);
-        }
-
+        Switch mSwitch = findViewById(R.id.switch_theme);
+        mSwitch.setChecked(sharedPref.loadNightModeState());
         mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked){
-                    sharedPref.setNightModeState(true);
-                    restartApp();
-                }else {
-                    sharedPref.setNightModeState(false);
-                    restartApp();
-                }
+                sharedPref.setNightModeState(isChecked);
+                restartApp();
             }
         });
     }
 
     private void restartApp() {
-        Intent i = new Intent(getApplicationContext(), SetActivity.class);
+        Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
         startActivity(i);
         finish();
+    }
+
+    private void checkForThemeChange() {
+        if (sharedPref.loadNightModeState()) {
+            setTheme(R.style.darkTheme);
+        } else {
+            setTheme(R.style.AppTheme);
+        }
     }
 }

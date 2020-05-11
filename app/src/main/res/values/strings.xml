@@ -30,5 +30,7 @@
     <string name="title">Title</string>
     <string name="detail_nasa_image">Detail Nasa image</string>
     <string name="nasa_image">Nasa Image</string>
+    <string name="args_transition_apod_name">%s_transition_name</string>
+    <string name="date_picker">Date Picker</string>
 
 </resources>

@@ -2,38 +2,24 @@ package com.example.android.nasapod.repo;
 
 
 import android.util.Log;
-
-import androidx.appcompat.app.AppCompatDelegate;
-
 import com.example.android.nasapod.GetDataService;
 import com.example.android.nasapod.RetrofitClientInstance;
 import com.example.android.nasapod.models.Apod;
-
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Response;
 
 
 public class RetrofitRepo implements ApodRepo {
-
-    @Override
-    public Apod getPicOfTheDay(LocalDate date) {
-
-        return makeCall(date);
-
-    }
-
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
 
     @Override
     public List<Apod> getListPicOfTheDay(LocalDate start, LocalDate end) {
-
 
         List<Apod> listOfApods = new ArrayList<>();
 
@@ -52,9 +38,9 @@ public class RetrofitRepo implements ApodRepo {
     private Apod makeCall(LocalDate date) {
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
 
-        DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern(DATE_FORMAT);
 
-        Call<Apod> call = service.getApods(date.toString(dtf));
+        Call<Apod> call = service.getApods(date.toString(dateTimeFormatter));
         Apod apod = null;
         try {
             Response<Apod> response = call.execute();
@@ -69,8 +55,6 @@ public class RetrofitRepo implements ApodRepo {
             Log.d("RetrofitRepo", "Not successful" + e);
         }
 
-
         return apod;
-
     }
 }

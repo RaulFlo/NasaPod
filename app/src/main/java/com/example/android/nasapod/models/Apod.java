@@ -14,16 +14,7 @@ public class Apod implements Parcelable {
     @SerializedName("date")
     private String mApodDate;
 
-
-    public Apod(String aPodImage, String aPodName, String aPodDate) {
-
-        this.mApodImage = aPodImage;
-        this.mApodName = aPodName;
-        this.mApodDate = aPodDate;
-
-    }
-
-    protected Apod(Parcel in) {
+    private Apod(Parcel in) {
         mApodImage = in.readString();
         mApodName = in.readString();
         mApodDate = in.readString();

@@ -5,28 +5,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.android.nasapod.R;
-import com.example.android.nasapod.adapter.ApodViewHolder;
 import com.example.android.nasapod.models.Apod;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> implements ApodViewHolder.Listener {
 
+    private static final String TAG = "ApodAdapter";
+    private List<Apod> mApodList;
+    private AdapterListener mListener;
+
     public interface AdapterListener {
         void onItemClick(Apod apod, View view);
     }
-
-    private static final String TAG = "ApodAdapter";
-
-    private List<Apod> mApodList;
-    private AdapterListener mListener;
 
     public ApodAdapter(List<Apod> apodList, AdapterListener listener) {
         mApodList = apodList;
@@ -38,7 +31,6 @@ public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> implements
         mApodList.addAll(apods);
         notifyDataSetChanged();
     }
-
 
     @NonNull
     @Override
@@ -54,17 +46,13 @@ public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> implements
 
         Log.d(TAG, "onBindViewHolder");
         Apod currentApod = mApodList.get(position);
-
         holder.bind(currentApod);
-
     }
-
 
     @Override
     public int getItemCount() {
         return mApodList.size();
     }
-
 
     @Override
     public void onItemClick(int adapterPosition, ImageView imageViewClicked) {

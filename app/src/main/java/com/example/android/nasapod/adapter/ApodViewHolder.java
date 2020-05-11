@@ -1,6 +1,5 @@
 package com.example.android.nasapod.adapter;
 
-import android.content.Context;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -21,25 +20,21 @@ import com.example.android.nasapod.MyApp;
 import com.example.android.nasapod.R;
 import com.example.android.nasapod.models.Apod;
 
-public class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-
+class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     interface Listener {
         void onItemClick(int adapterPosition, ImageView imageViewClicked);
     }
 
-    public ImageView mImageView;
-    public TextView mTitleName;
-    public TextView mDate;
-    public Listener mListener;
-    public CardView mContainer;
+    private ImageView mImageView;
+    private TextView mTitleName;
+    private TextView mDate;
+    private Listener mListener;
+    private CardView mContainer;
 
 
-    public ApodViewHolder(@NonNull View itemView, Listener listener) {
+    ApodViewHolder(@NonNull View itemView, Listener listener) {
         super(itemView);
-
-
         mContainer = itemView.findViewById(R.id.container);
         mListener = listener;
         mImageView = itemView.findViewById(R.id.image_view_image);
@@ -52,7 +47,7 @@ public class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void bind(Apod anApod) {
+    void bind(Apod anApod) {
         mContainer.setAnimation(AnimationUtils.loadAnimation(MyApp.getAppContext(), R.anim.fade_transition_animation));
 
         String imageUrl = anApod.getApodImage();
@@ -63,8 +58,6 @@ public class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
                 // you now have a bitmap
                 mImageView.setImageBitmap(resource);
                 createPaletteAsync(resource);
-
-
             }
 
             @Override
@@ -75,8 +68,10 @@ public class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
         mTitleName.setText(anApod.getApodName());
         mDate.setText(anApod.getApodDate());
-        // TODO: make string resource with argument for apodName
-        mImageView.setTransitionName(anApod.getApodName() + "_transition");
+
+        String transitionName = itemView.getContext().getString(R.string.args_transition_apod_name, anApod.getApodName());
+        mImageView.setTransitionName(transitionName);
+
     }
 
 
@@ -90,23 +85,19 @@ public class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         }
     }
 
-
     // Generate palette asynchronously and use it on a different, thread using onGenerated()
-    public void createPaletteAsync(Bitmap bitmap) {
+    private void createPaletteAsync(Bitmap bitmap) {
         Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             public void onGenerated(Palette palette) {
                 // Use generated instance
-
                 int color = MyApp.getAppContext().getResources().getColor(R.color.colorPrimaryDark);
                 int dominantColor = palette.getDominantColor(color);
                 int cardColor = MyApp.getAppContext().getResources().getColor(R.color.colorPrimaryDark);
                 int darkMutedColor = palette.getDarkMutedColor(cardColor);
 
-
                 mImageView.setBackgroundColor(dominantColor);
                 mContainer.setBackgroundColor(darkMutedColor);
-
             }
         });
     }

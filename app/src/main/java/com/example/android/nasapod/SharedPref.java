@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class SharedPref {
-    SharedPreferences mySharedPref;
+    private SharedPreferences mySharedPref;
 
     public SharedPref (Context context){
         mySharedPref = context.getSharedPreferences("sharedPrefFile", Context.MODE_PRIVATE);
@@ -19,7 +19,6 @@ public class SharedPref {
 
     //method will load the night mode state
     public Boolean loadNightModeState(){
-        Boolean state = mySharedPref.getBoolean("NightMode",false);
-        return state;
+        return mySharedPref.getBoolean("NightMode",false);
     }
 }

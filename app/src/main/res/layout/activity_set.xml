@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="24dp"
     android:background="?attr/backgroundColor"
-    tools:context=".activities.SetActivity">
+    tools:context=".activities.SettingsActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
