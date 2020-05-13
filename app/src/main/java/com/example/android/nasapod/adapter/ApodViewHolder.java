@@ -31,6 +31,7 @@ class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
     private TextView mDate;
     private Listener mListener;
     private CardView mContainer;
+    private View mLayoutWrapper;
 
 
     ApodViewHolder(@NonNull View itemView, Listener listener) {
@@ -40,7 +41,7 @@ class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
         mImageView = itemView.findViewById(R.id.image_view_image);
         mTitleName = itemView.findViewById(R.id.text_view_titleName);
         mDate = itemView.findViewById(R.id.text_view_date);
-
+        mLayoutWrapper = itemView.findViewById(R.id.linear_layout_wrapper);
         //link the click listener
         itemView.setOnClickListener(this);
     }
@@ -97,7 +98,7 @@ class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
                 int darkMutedColor = palette.getDarkMutedColor(cardColor);
 
                 mImageView.setBackgroundColor(dominantColor);
-                mContainer.setBackgroundColor(darkMutedColor);
+                mLayoutWrapper.setBackgroundColor(darkMutedColor);
             }
         });
     }
