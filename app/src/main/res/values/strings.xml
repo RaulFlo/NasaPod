@@ -32,5 +32,6 @@
     <string name="nasa_image">Nasa Image</string>
     <string name="args_transition_apod_name">%s_transition_name</string>
     <string name="date_picker">Date Picker</string>
+    <string name="explanation">Explanation</string>
 
 </resources>

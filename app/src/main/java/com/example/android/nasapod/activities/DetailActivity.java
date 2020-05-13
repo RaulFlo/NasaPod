@@ -57,6 +57,7 @@ public class DetailActivity extends AppCompatActivity {
             String imageExtra = apod.getApodImage();
             String titleExtra = apod.getApodName();
             String dateExtra = apod.getApodDate();
+            String explanationExtra = apod.getApodExplanation();
 
             //LINK TO VIEW
             final ImageView imageView = findViewById(R.id.image_view_detail);
@@ -65,6 +66,7 @@ public class DetailActivity extends AppCompatActivity {
             imageView.setTransitionName(apodTransitionName);
             TextView textViewTitle = findViewById(R.id.text_view_title_detail);
             TextView textViewDate = findViewById(R.id.text_view_date_detail);
+            TextView textViewExplanation = findViewById(R.id.text_view_explanation);
 
             //link extras to the view
             //Glide.with(this).load(imageExtra).fitCenter().into(imageView);
@@ -88,6 +90,7 @@ public class DetailActivity extends AppCompatActivity {
 
             textViewTitle.setText(titleExtra);
             textViewDate.setText(dateExtra);
+            textViewExplanation.setText(explanationExtra);
         }
     }
 

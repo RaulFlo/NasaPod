@@ -13,11 +13,14 @@ public class Apod implements Parcelable {
     private String mApodName;
     @SerializedName("date")
     private String mApodDate;
+    @SerializedName("explanation")
+    private String mExplanation;
 
     private Apod(Parcel in) {
         mApodImage = in.readString();
         mApodName = in.readString();
         mApodDate = in.readString();
+        mExplanation = in.readString();
     }
 
     @Override
@@ -25,6 +28,7 @@ public class Apod implements Parcelable {
         dest.writeString(mApodImage);
         dest.writeString(mApodName);
         dest.writeString(mApodDate);
+        dest.writeString(mExplanation);
     }
 
     @Override
@@ -55,4 +59,6 @@ public class Apod implements Parcelable {
     public String getApodDate() {
         return mApodDate;
     }
+
+    public String getApodExplanation(){return mExplanation;}
 }
