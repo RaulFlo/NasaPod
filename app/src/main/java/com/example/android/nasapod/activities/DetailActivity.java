@@ -45,6 +45,8 @@ public class DetailActivity extends AppCompatActivity {
         checkForThemeChange();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        //back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         Intent intent = getIntent();

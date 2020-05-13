@@ -25,6 +25,8 @@ public class SettingsActivity extends AppCompatActivity {
         checkForThemeChange();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set);
+        //back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Switch mSwitch = findViewById(R.id.switch_theme);
         mSwitch.setChecked(sharedPref.loadNightModeState());
