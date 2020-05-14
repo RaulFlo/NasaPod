@@ -3,6 +3,7 @@ package com.example.android.nasapod.activities;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.palette.graphics.Palette;
 
 import android.content.Context;
@@ -13,7 +14,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -30,7 +30,7 @@ public class DetailActivity extends AppCompatActivity {
     private static final String APOD = "Apod";
     private static final String APOD_TRANSITION_NAME = "ApodTransitionName";
     SharedPref sharedPref = new SharedPref(MyApp.getAppContext());
-    private LinearLayout linearLayout;
+    private CoordinatorLayout coordinatorLayout;
 
 
     public static Intent newIntent(Context context, Apod apod, View view) {
@@ -61,7 +61,7 @@ public class DetailActivity extends AppCompatActivity {
 
             //LINK TO VIEW
             final ImageView imageView = findViewById(R.id.image_view_detail);
-            linearLayout = findViewById(R.id.linear_layout_detail_page);
+            coordinatorLayout = findViewById(R.id.layout_detail_page);
             // setting transition name to image detail view
             imageView.setTransitionName(apodTransitionName);
             TextView textViewTitle = findViewById(R.id.text_view_title_detail);
@@ -111,7 +111,7 @@ public class DetailActivity extends AppCompatActivity {
                 int color = MyApp.getAppContext().getResources().getColor(R.color.colorPrimaryDark);
                 int dominantColor = palette.getDominantColor(color);
 
-                linearLayout.setBackgroundColor(dominantColor);
+                coordinatorLayout.setBackgroundColor(dominantColor);
 
             }
         });
