@@ -1,6 +1,7 @@
 package com.example.android.nasapod.activities;
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -46,6 +47,11 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
     protected void onStart() {
         checkForThemeChange();
         super.onStart();
+    }
+
+    public static Intent newIntent(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        return intent;
     }
 
     @Override
