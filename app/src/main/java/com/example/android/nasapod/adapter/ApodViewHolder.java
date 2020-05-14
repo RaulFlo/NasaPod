@@ -70,6 +70,7 @@ class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
         mTitleName.setText(anApod.getApodName());
         mDate.setText(anApod.getApodDate());
 
+
         String transitionName = itemView.getContext().getString(R.string.args_transition_apod_name, anApod.getApodName());
         mImageView.setTransitionName(transitionName);
 

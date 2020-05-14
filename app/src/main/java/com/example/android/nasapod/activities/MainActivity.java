@@ -1,6 +1,7 @@
 package com.example.android.nasapod.activities;
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -48,6 +49,11 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         super.onStart();
     }
 
+    public static Intent newIntent(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        return intent;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         checkForThemeChange();
@@ -60,7 +66,10 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         //if you know its not going to change in size
         mRecyclerView.setHasFixedSize(true);
         //set to LinearLayout default vertical
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
         mApodAdapter = new ApodAdapter(new ArrayList<Apod>(), MainActivity.this);
         mRecyclerView.setAdapter(mApodAdapter);
 
@@ -75,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
 
     @Override
     public void onItemClick(Apod apod, View view) {
-        Intent detailIntent = DetailActivity.newIntent(this,apod, view);
+        Intent detailIntent = DetailActivity.newIntent(this, apod, view);
 
         ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(
                 MainActivity.this, view, view.getTransitionName());
@@ -129,8 +138,8 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
                                                int dayStart, int yearEnd,
                                                int monthEnd, int dayEnd) {
 
-                        LocalDate sDay = convertTimeToJodaTime(yearStart,monthStart,dayStart);
-                        LocalDate eDay = convertTimeToJodaTime(yearEnd,monthEnd, dayEnd);
+                        LocalDate sDay = convertTimeToJodaTime(yearStart, monthStart, dayStart);
+                        LocalDate eDay = convertTimeToJodaTime(yearEnd, monthEnd, dayEnd);
 
                         ApodRepo retrofitRepo = new RetrofitRepo();
                         new GetListPicOfTheDayAsyncTask(new GetListPicOfTheDayAsyncTask.Listener() {
@@ -152,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private LocalDate convertTimeToJodaTime(int firstDate, int secondDate, int thirdDated){
+    private LocalDate convertTimeToJodaTime(int firstDate, int secondDate, int thirdDated) {
 
         //convert int days to LocalDate add one on months since its 0-11
         java.time.LocalDate parsedDate = java.time.LocalDate.of(firstDate, secondDate + 1, thirdDated);
