@@ -24,12 +24,14 @@ import com.example.android.nasapod.R;
 import com.example.android.nasapod.SharedPref;
 import com.example.android.nasapod.models.Apod;
 
+import java.util.Objects;
+
 
 public class DetailActivity extends AppCompatActivity {
 
     private static final String APOD = "Apod";
     private static final String APOD_TRANSITION_NAME = "ApodTransitionName";
-    SharedPref sharedPref = new SharedPref(MyApp.getAppContext());
+    private final SharedPref sharedPref = new SharedPref(MyApp.getAppContext());
     private CoordinatorLayout coordinatorLayout;
 
 
@@ -46,7 +48,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         //back button
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
 
         Intent intent = getIntent();

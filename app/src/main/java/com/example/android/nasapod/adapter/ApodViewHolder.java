@@ -26,12 +26,12 @@ class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
         void onItemClick(int adapterPosition, ImageView imageViewClicked);
     }
 
-    private ImageView mImageView;
-    private TextView mTitleName;
-    private TextView mDate;
-    private Listener mListener;
-    private CardView mContainer;
-    private View mLayoutWrapper;
+    private final ImageView mImageView;
+    private final TextView mTitleName;
+    private final TextView mDate;
+    private final Listener mListener;
+    private final CardView mContainer;
+    private final View mLayoutWrapper;
 
 
     ApodViewHolder(@NonNull View itemView, Listener listener) {

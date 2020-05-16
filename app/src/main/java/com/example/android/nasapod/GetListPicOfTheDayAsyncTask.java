@@ -13,7 +13,7 @@ public class GetListPicOfTheDayAsyncTask extends AsyncTask<ApodRepoAndDate, Inte
         void onApodsReturned(List<Apod> apods);
     }
 
-    private Listener mListener;
+    private final Listener mListener;
 
     public GetListPicOfTheDayAsyncTask(Listener listener) {
         mListener = listener;
