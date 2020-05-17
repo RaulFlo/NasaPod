@@ -1,6 +1,5 @@
 package com.example.android.nasapod.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;

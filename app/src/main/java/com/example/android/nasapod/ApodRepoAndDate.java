@@ -4,9 +4,9 @@ import com.example.android.nasapod.repo.ApodRepo;
 import org.joda.time.LocalDate;
 
 public class ApodRepoAndDate {
-    ApodRepo mApodRepo;
-    LocalDate mStartDate;
-    LocalDate mEndDate;
+    final ApodRepo mApodRepo;
+    final LocalDate mStartDate;
+    final LocalDate mEndDate;
 
 
     public ApodRepoAndDate(ApodRepo apodRepo, org.joda.time.LocalDate date, org.joda.time.LocalDate date2) {

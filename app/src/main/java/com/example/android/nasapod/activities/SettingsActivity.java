@@ -12,9 +12,11 @@ import com.example.android.nasapod.MyApp;
 import com.example.android.nasapod.R;
 import com.example.android.nasapod.SharedPref;
 
+import java.util.Objects;
+
 public class SettingsActivity extends AppCompatActivity {
 
-    SharedPref sharedPref = new SharedPref(MyApp.getAppContext());
+    private final SharedPref sharedPref = new SharedPref(MyApp.getAppContext());
 
     public static Intent newIntent(Context context) {
         return new Intent(context, SettingsActivity.class);
@@ -26,7 +28,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set);
         //back button
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         Switch mSwitch = findViewById(R.id.switch_theme);
         mSwitch.setChecked(sharedPref.loadNightModeState());

@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
     private static final int FROM_DAY_REQUESTED = 7;
     private static final int TO_DAY_REQUESTED = 1;
 
-    SharedPref sharedPref = new SharedPref(MyApp.getAppContext());
+    private final SharedPref sharedPref = new SharedPref(MyApp.getAppContext());
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -50,8 +50,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
     }
 
     public static Intent newIntent(Context context) {
-        Intent intent = new Intent(context, MainActivity.class);
-        return intent;
+        return new Intent(context, MainActivity.class);
     }
 
     @Override

@@ -14,8 +14,8 @@ import java.util.List;
 public class ApodAdapter extends RecyclerView.Adapter<ApodViewHolder> implements ApodViewHolder.Listener {
 
     private static final String TAG = "ApodAdapter";
-    private List<Apod> mApodList;
-    private AdapterListener mListener;
+    private final List<Apod> mApodList;
+    private final AdapterListener mListener;
 
     public interface AdapterListener {
         void onItemClick(Apod apod, View view);

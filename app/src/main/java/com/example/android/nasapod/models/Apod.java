@@ -8,13 +8,13 @@ import com.google.gson.annotations.SerializedName;
 public class Apod implements Parcelable {
 
     @SerializedName("url")
-    private String mApodImage;
+    private final String mApodImage;
     @SerializedName("title")
-    private String mApodName;
+    private final String mApodName;
     @SerializedName("date")
-    private String mApodDate;
+    private final String mApodDate;
     @SerializedName("explanation")
-    private String mExplanation;
+    private final String mExplanation;
 
     private Apod(Parcel in) {
         mApodImage = in.readString();
