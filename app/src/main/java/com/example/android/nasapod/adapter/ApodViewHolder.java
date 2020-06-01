@@ -1,6 +1,7 @@
 package com.example.android.nasapod.adapter;
 
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -19,6 +20,11 @@ import com.bumptech.glide.request.transition.Transition;
 import com.example.android.nasapod.MyApp;
 import com.example.android.nasapod.R;
 import com.example.android.nasapod.models.Apod;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Objects;
 
 class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -68,12 +74,22 @@ class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
         });
 
         mTitleName.setText(anApod.getApodName());
-        mDate.setText(anApod.getApodDate());
+        try {
+            mDate.setText(convertDate(anApod.getApodDate()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
 
         String transitionName = itemView.getContext().getString(R.string.args_transition_apod_name, anApod.getApodName());
         mImageView.setTransitionName(transitionName);
 
+    }
+
+    private String convertDate(String apodDate) throws ParseException {
+        @SuppressLint("SimpleDateFormat") DateFormat iFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        @SuppressLint("SimpleDateFormat") DateFormat oFormatter = new SimpleDateFormat("MM-dd-yyyy");
+        return oFormatter.format(Objects.requireNonNull(iFormatter.parse(apodDate)));
     }
 
 
@@ -103,6 +119,8 @@ class ApodViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
             }
         });
     }
+
+
 }
 
 
