@@ -4,7 +4,10 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="4dp"
     app:cardCornerRadius="8dp">
 
     <LinearLayout
@@ -20,8 +23,8 @@
             android:id="@+id/image_view_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scaleType="centerCrop"
             android:contentDescription="@string/nasa_image"
+            android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher" />
 
         <TextView
