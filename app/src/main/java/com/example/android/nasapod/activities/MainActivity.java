@@ -39,7 +39,9 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
     private static final int SHOW_YEARS = 5;
     private static final int FROM_DAY_REQUESTED = 7;
     private static final int TO_DAY_REQUESTED = 1;
-
+    private String rangeDate;
+    private boolean isRangeSelected;
+    private MenuItem menuItem;
     private final SharedPref sharedPref = new SharedPref(MyApp.getAppContext());
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -79,7 +81,9 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
             }
         }).execute(new ApodRepoAndDate(retrofitRepo,
                 LocalDate.now().minusDays(FROM_DAY_REQUESTED), LocalDate.now().minusDays(TO_DAY_REQUESTED)));
+
     }
+
 
     @Override
     public void onItemClick(Apod apod, View view) {
@@ -107,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
 
             case R.id.theme_menu_item:
                 startActivity(SettingsActivity.newIntent(MainActivity.this));
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -137,8 +142,13 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
                                                int dayStart, int yearEnd,
                                                int monthEnd, int dayEnd) {
 
+                        isRangeSelected = true;
+                        invalidateOptionsMenu();
                         LocalDate sDay = convertTimeToJodaTime(yearStart, monthStart, dayStart);
                         LocalDate eDay = convertTimeToJodaTime(yearEnd, monthEnd, dayEnd);
+
+                        rangeDate = "[" + (monthStart + 1) + "/" + dayStart + "/" + yearStart +
+                                "-" + (monthEnd + 1) + "/" + dayEnd + "/" + yearEnd + "]";
 
                         ApodRepo retrofitRepo = new RetrofitRepo();
                         new GetListPicOfTheDayAsyncTask(new GetListPicOfTheDayAsyncTask.Listener() {
@@ -157,6 +167,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         //show fragment
         smoothDateRangePickerFragment.show(getFragmentManager(), "smoothDateRangePicker");
 
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -170,5 +181,14 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         return LocalDate.parse(stringDate);
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem item = menu.findItem(R.id.range_date_title);
+        if (isRangeSelected) {
+            item.setVisible(true);
+            item.setTitle(rangeDate);
+        }
 
+        return super.onPrepareOptionsMenu(menu);
+    }
 }
