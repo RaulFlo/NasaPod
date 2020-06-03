@@ -5,12 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -41,8 +44,8 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
     private static final int TO_DAY_REQUESTED = 1;
     private String rangeDate;
     private boolean isRangeSelected;
-    private MenuItem menuItem;
     private final SharedPref sharedPref = new SharedPref(MyApp.getAppContext());
+    private ProgressBar mProgressBar;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -55,11 +58,16 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         return new Intent(context, MainActivity.class);
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         checkForThemeChange();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mProgressBar = findViewById(R.id.main_progress_bar);
+
+
 
         ApodRepo retrofitRepo = new RetrofitRepo();
         //link RecyclerView with xml RecyclerView in activity_main.xml
@@ -168,6 +176,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         smoothDateRangePickerFragment.show(getFragmentManager(), "smoothDateRangePicker");
 
 
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -191,4 +200,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
 
         return super.onPrepareOptionsMenu(menu);
     }
+
+
+
 }

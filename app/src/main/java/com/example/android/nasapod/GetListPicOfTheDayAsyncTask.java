@@ -33,4 +33,15 @@ public class GetListPicOfTheDayAsyncTask extends AsyncTask<ApodRepoAndDate, Inte
         super.onPostExecute(apods);
         mListener.onApodsReturned(apods);
     }
+
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+
+    }
 }
