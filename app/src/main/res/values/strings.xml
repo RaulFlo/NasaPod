@@ -20,5 +20,12 @@
     <string name="args_transition_apod_name">%s_transition_name</string>
     <string name="date_picker">Date Picker</string>
     <string name="explanation">Explanation</string>
+    <string name="about">About</string>
+    <string name="about_description">(APOD)Astronomy Picture of the Day and is the largest
+    collection of annotated astronomical images on the internet.
+        Authors &amp; editors: Robert Nemiroff (MTU) &amp; Jerry Bonnell (UMCP)
+        NASA Official: Phillip Newman Specific rights apply.
+        NASA Web Privacy Policy and Important Notices
+        A service of: ASD at NASA / GSFC &amp; Michigan Tech. U.</string>
 
 </resources>

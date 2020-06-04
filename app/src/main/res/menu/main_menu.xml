@@ -20,4 +20,8 @@
         android:title="@string/settings"
         />
 
+    <item android:id="@+id/about_menu_item"
+        app:showAsAction="never"
+        android:title="@string/about"/>
+
 </menu>

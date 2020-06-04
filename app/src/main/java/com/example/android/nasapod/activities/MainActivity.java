@@ -82,13 +82,15 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         mApodAdapter = new ApodAdapter(new ArrayList<Apod>(), MainActivity.this);
         mRecyclerView.setAdapter(mApodAdapter);
 
-        new GetListPicOfTheDayAsyncTask(new GetListPicOfTheDayAsyncTask.Listener() {
+         new GetListPicOfTheDayAsyncTask(new GetListPicOfTheDayAsyncTask.Listener() {
             @Override
             public void onApodsReturned(List<Apod> apods) {
                 mApodAdapter.updateData(apods);
             }
-        }).execute(new ApodRepoAndDate(retrofitRepo,
+        },mProgressBar).execute(new ApodRepoAndDate(retrofitRepo,
                 LocalDate.now().minusDays(FROM_DAY_REQUESTED), LocalDate.now().minusDays(TO_DAY_REQUESTED)));
+
+
 
     }
 
@@ -119,6 +121,9 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
 
             case R.id.theme_menu_item:
                 startActivity(SettingsActivity.newIntent(MainActivity.this));
+
+            case R.id.about_menu_item:
+                startActivity(AboutActivity.newIntent(MainActivity.this));
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -164,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
                             public void onApodsReturned(List<Apod> apods) {
                                 mApodAdapter.updateData(apods);
                             }
-                        }).execute(new ApodRepoAndDate(retrofitRepo, sDay, eDay));
+                        },mProgressBar).execute(new ApodRepoAndDate(retrofitRepo, sDay, eDay));
 
                     }
                 }, year, month, day);

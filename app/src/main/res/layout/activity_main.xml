@@ -7,17 +7,19 @@
 
     <ProgressBar
         android:id="@+id/main_progress_bar"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:visibility="gone"
         android:max="100"
         android:progress="0"
-        android:visibility="gone" />
+         />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/backgroundColor" />
+        android:background="?attr/backgroundColor"
+        android:layout_below="@+id/main_progress_bar"/>
 </RelativeLayout>
