@@ -67,8 +67,6 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
 
         mProgressBar = findViewById(R.id.main_progress_bar);
 
-
-
         ApodRepo retrofitRepo = new RetrofitRepo();
         //link RecyclerView with xml RecyclerView in activity_main.xml
         RecyclerView mRecyclerView = findViewById(R.id.recycler_view);
@@ -82,12 +80,15 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         mApodAdapter = new ApodAdapter(new ArrayList<Apod>(), MainActivity.this);
         mRecyclerView.setAdapter(mApodAdapter);
 
+        mProgressBar.setVisibility(View.VISIBLE);
          new GetListPicOfTheDayAsyncTask(new GetListPicOfTheDayAsyncTask.Listener() {
             @Override
             public void onApodsReturned(List<Apod> apods) {
                 mApodAdapter.updateData(apods);
+                mProgressBar.setProgress(100);
+                mProgressBar.setVisibility(View.GONE);
             }
-        },mProgressBar).execute(new ApodRepoAndDate(retrofitRepo,
+        }).execute(new ApodRepoAndDate(retrofitRepo,
                 LocalDate.now().minusDays(FROM_DAY_REQUESTED), LocalDate.now().minusDays(TO_DAY_REQUESTED)));
 
 
@@ -145,8 +146,12 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
+
+
         SmoothDateRangePickerFragment smoothDateRangePickerFragment = SmoothDateRangePickerFragment.newInstance(
                 new SmoothDateRangePickerFragment.OnDateRangeSetListener() {
+
+
 
                     @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
@@ -154,6 +159,8 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
                                                int yearStart, int monthStart,
                                                int dayStart, int yearEnd,
                                                int monthEnd, int dayEnd) {
+
+                        mProgressBar.setVisibility(View.VISIBLE);
 
                         isRangeSelected = true;
                         invalidateOptionsMenu();
@@ -168,8 +175,10 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
                             @Override
                             public void onApodsReturned(List<Apod> apods) {
                                 mApodAdapter.updateData(apods);
+                                mProgressBar.setProgress(100);
+                                mProgressBar.setVisibility(View.GONE);
                             }
-                        },mProgressBar).execute(new ApodRepoAndDate(retrofitRepo, sDay, eDay));
+                        }).execute(new ApodRepoAndDate(retrofitRepo, sDay, eDay));
 
                     }
                 }, year, month, day);

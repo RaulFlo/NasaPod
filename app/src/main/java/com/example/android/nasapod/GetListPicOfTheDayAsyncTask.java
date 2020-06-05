@@ -1,9 +1,6 @@
 package com.example.android.nasapod;
 
 import android.os.AsyncTask;
-import android.os.SystemClock;
-import android.widget.ProgressBar;
-
 import com.example.android.nasapod.models.Apod;
 import org.joda.time.LocalDate;
 import java.util.List;
@@ -17,11 +14,9 @@ public class GetListPicOfTheDayAsyncTask extends AsyncTask<ApodRepoAndDate, Inte
     }
 
     private final Listener mListener;
-    ProgressBar bar;
 
-    public GetListPicOfTheDayAsyncTask(Listener listener,ProgressBar bar) {
+    public GetListPicOfTheDayAsyncTask(Listener listener) {
         mListener = listener;
-        this.bar = bar;
 
     }
 
@@ -42,21 +37,6 @@ public class GetListPicOfTheDayAsyncTask extends AsyncTask<ApodRepoAndDate, Inte
     protected void onPostExecute(List<Apod> apods) {
         super.onPostExecute(apods);
         mListener.onApodsReturned(apods);
-        bar.setProgress(100);
     }
 
-    @Override
-    protected void onProgressUpdate(Integer... values) {
-        super.onProgressUpdate(values);
-        if (this.bar != null) {
-            bar.setProgress(values[0]);
-        }
-    }
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        bar.setProgress(0);
-
-    }
 }
