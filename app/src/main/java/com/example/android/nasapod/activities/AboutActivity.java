@@ -10,6 +10,8 @@ import com.example.android.nasapod.MyApp;
 import com.example.android.nasapod.R;
 import com.example.android.nasapod.SharedPref;
 
+import java.util.Objects;
+
 public class AboutActivity extends AppCompatActivity {
 
     private final SharedPref sharedPref = new SharedPref(MyApp.getAppContext());
@@ -23,6 +25,9 @@ public class AboutActivity extends AppCompatActivity {
         checkForThemeChange();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+
+        //back button
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
 
     private void checkForThemeChange() {

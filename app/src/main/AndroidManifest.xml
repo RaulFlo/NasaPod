@@ -28,11 +28,13 @@
         </activity>
         <activity
             android:name=".activities.SettingsActivity"
+            android:label="@string/settings"
             android:configChanges="orientation"
             android:parentActivityName=".activities.MainActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.AboutActivity"
+            android:label="@string/about"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
