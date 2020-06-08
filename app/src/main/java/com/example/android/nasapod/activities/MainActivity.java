@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
     private boolean isRangeSelected;
     private final SharedPref sharedPref = new SharedPref(MyApp.getAppContext());
     private ProgressBar mProgressBar;
+    private RecyclerView mRecyclerView;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
 
         ApodRepo retrofitRepo = new RetrofitRepo();
         //link RecyclerView with xml RecyclerView in activity_main.xml
-        RecyclerView mRecyclerView = findViewById(R.id.recycler_view);
+         mRecyclerView = findViewById(R.id.recycler_view);
         //if you know its not going to change in size
         mRecyclerView.setHasFixedSize(true);
         //set to LinearLayout default vertical
