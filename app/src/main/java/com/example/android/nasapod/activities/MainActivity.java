@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -40,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
 
     private ApodAdapter mApodAdapter;
     private static final int SHOW_YEARS = 5;
-    private static final int FROM_DAY_REQUESTED = 28;
+    private static final int FROM_DAY_REQUESTED = 20;
     private static final int TO_DAY_REQUESTED = 1;
     private String rangeDate;
     private boolean isRangeSelected;
@@ -121,12 +119,12 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
                 createDateRangePicker();
                 return true;
 
-            case R.id.theme_menu_item:
+            case R.id.settings_menu_item:
                 startActivity(SettingsActivity.newIntent(MainActivity.this));
-
+                return true;
             case R.id.about_menu_item:
                 startActivity(AboutActivity.newIntent(MainActivity.this));
-
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
