@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.palette.graphics.Palette;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -24,6 +25,9 @@ import com.example.android.nasapod.R;
 import com.example.android.nasapod.SharedPref;
 import com.example.android.nasapod.models.Apod;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Objects;
 
 
@@ -61,6 +65,13 @@ public class DetailActivity extends AppCompatActivity {
             String dateExtra = apod.getApodDate();
             String explanationExtra = apod.getApodExplanation();
 
+            String getConvertedDate = null;
+            try {
+                getConvertedDate = convertDate(dateExtra);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
             //LINK TO VIEW
             final ImageView imageView = findViewById(R.id.image_view_detail);
             coordinatorLayout = findViewById(R.id.layout_detail_page);
@@ -91,9 +102,15 @@ public class DetailActivity extends AppCompatActivity {
                     });
 
             textViewTitle.setText(titleExtra);
-            textViewDate.setText(dateExtra);
+            textViewDate.setText(getConvertedDate);
             textViewExplanation.setText(explanationExtra);
         }
+    }
+
+    private String convertDate(String dateExtra) throws ParseException {
+        @SuppressLint("SimpleDateFormat") DateFormat iFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        @SuppressLint("SimpleDateFormat") DateFormat oFormatter = new SimpleDateFormat("MM-dd-yyyy");
+        return oFormatter.format(Objects.requireNonNull(iFormatter.parse(dateExtra)));
     }
 
     private void checkForThemeChange() {

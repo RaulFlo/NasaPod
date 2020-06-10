@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -37,10 +38,13 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
 
     private ApodAdapter mApodAdapter;
     private static final int SHOW_YEARS = 5;
-    private static final int FROM_DAY_REQUESTED = 7;
+    private static final int FROM_DAY_REQUESTED = 20;
     private static final int TO_DAY_REQUESTED = 1;
-
+    private String rangeDate;
+    private boolean isRangeSelected;
     private final SharedPref sharedPref = new SharedPref(MyApp.getAppContext());
+    private ProgressBar mProgressBar;
+    private RecyclerView mRecyclerView;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -53,15 +57,18 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         return new Intent(context, MainActivity.class);
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         checkForThemeChange();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mProgressBar = findViewById(R.id.main_progress_bar);
+
         ApodRepo retrofitRepo = new RetrofitRepo();
         //link RecyclerView with xml RecyclerView in activity_main.xml
-        RecyclerView mRecyclerView = findViewById(R.id.recycler_view);
+         mRecyclerView = findViewById(R.id.recycler_view);
         //if you know its not going to change in size
         mRecyclerView.setHasFixedSize(true);
         //set to LinearLayout default vertical
@@ -72,14 +79,21 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         mApodAdapter = new ApodAdapter(new ArrayList<Apod>(), MainActivity.this);
         mRecyclerView.setAdapter(mApodAdapter);
 
-        new GetListPicOfTheDayAsyncTask(new GetListPicOfTheDayAsyncTask.Listener() {
+        mProgressBar.setVisibility(View.VISIBLE);
+         new GetListPicOfTheDayAsyncTask(new GetListPicOfTheDayAsyncTask.Listener() {
             @Override
             public void onApodsReturned(List<Apod> apods) {
                 mApodAdapter.updateData(apods);
+                mProgressBar.setProgress(100);
+                mProgressBar.setVisibility(View.GONE);
             }
         }).execute(new ApodRepoAndDate(retrofitRepo,
                 LocalDate.now().minusDays(FROM_DAY_REQUESTED), LocalDate.now().minusDays(TO_DAY_REQUESTED)));
+
+
+
     }
+
 
     @Override
     public void onItemClick(Apod apod, View view) {
@@ -105,8 +119,12 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
                 createDateRangePicker();
                 return true;
 
-            case R.id.theme_menu_item:
+            case R.id.settings_menu_item:
                 startActivity(SettingsActivity.newIntent(MainActivity.this));
+                return true;
+            case R.id.about_menu_item:
+                startActivity(AboutActivity.newIntent(MainActivity.this));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -127,8 +145,12 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
+
+
         SmoothDateRangePickerFragment smoothDateRangePickerFragment = SmoothDateRangePickerFragment.newInstance(
                 new SmoothDateRangePickerFragment.OnDateRangeSetListener() {
+
+
 
                     @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
@@ -137,14 +159,23 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
                                                int dayStart, int yearEnd,
                                                int monthEnd, int dayEnd) {
 
+                        mProgressBar.setVisibility(View.VISIBLE);
+
+                        isRangeSelected = true;
+                        invalidateOptionsMenu();
                         LocalDate sDay = convertTimeToJodaTime(yearStart, monthStart, dayStart);
                         LocalDate eDay = convertTimeToJodaTime(yearEnd, monthEnd, dayEnd);
+
+                        rangeDate = "[" + (monthStart + 1) + "/" + dayStart + "/" + yearStart +
+                                "-" + (monthEnd + 1) + "/" + dayEnd + "/" + yearEnd + "]";
 
                         ApodRepo retrofitRepo = new RetrofitRepo();
                         new GetListPicOfTheDayAsyncTask(new GetListPicOfTheDayAsyncTask.Listener() {
                             @Override
                             public void onApodsReturned(List<Apod> apods) {
                                 mApodAdapter.updateData(apods);
+                                mProgressBar.setProgress(100);
+                                mProgressBar.setVisibility(View.GONE);
                             }
                         }).execute(new ApodRepoAndDate(retrofitRepo, sDay, eDay));
 
@@ -156,6 +187,8 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         smoothDateRangePickerFragment.setMinDate(c);
         //show fragment
         smoothDateRangePickerFragment.show(getFragmentManager(), "smoothDateRangePicker");
+
+
 
     }
 
@@ -169,6 +202,18 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
         //return parsed String to Locale Date joda
         return LocalDate.parse(stringDate);
     }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem item = menu.findItem(R.id.range_date_title);
+        if (isRangeSelected) {
+            item.setVisible(true);
+            item.setTitle(rangeDate);
+        }
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
 
 
 }

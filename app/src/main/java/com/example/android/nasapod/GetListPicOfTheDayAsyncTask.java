@@ -17,7 +17,10 @@ public class GetListPicOfTheDayAsyncTask extends AsyncTask<ApodRepoAndDate, Inte
 
     public GetListPicOfTheDayAsyncTask(Listener listener) {
         mListener = listener;
+
     }
+
+
 
     @Override
     protected List<Apod> doInBackground(ApodRepoAndDate... apodRepoAndDates) {
@@ -25,12 +28,15 @@ public class GetListPicOfTheDayAsyncTask extends AsyncTask<ApodRepoAndDate, Inte
         LocalDate dateRequested = apodRepoAndDate.mStartDate;
         LocalDate dateRequested2 = apodRepoAndDate.mEndDate.plusDays(ADD_DAY_REQUESTED);
 
+
         return apodRepoAndDate.mApodRepo.getListPicOfTheDay(dateRequested,dateRequested2);
     }
+
 
     @Override
     protected void onPostExecute(List<Apod> apods) {
         super.onPostExecute(apods);
         mListener.onApodsReturned(apods);
     }
+
 }
