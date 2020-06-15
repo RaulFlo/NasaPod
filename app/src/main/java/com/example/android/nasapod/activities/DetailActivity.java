@@ -3,6 +3,7 @@ package com.example.android.nasapod.activities;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -164,6 +165,19 @@ public class DetailActivity extends AppCompatActivity {
 
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case DEFAULT_REQUEST_CODE_FOR_WRITE_PERMISSION:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    ImageUrlDownloadUtil.attemptToDownload(this, mWallpaperUrl, DEFAULT_REQUEST_CODE_FOR_WRITE_PERMISSION);
+                }
+                break;
         }
     }
 }
