@@ -1,11 +1,5 @@
 package com.example.android.nasapod.activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.palette.graphics.Palette;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -21,9 +15,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.palette.graphics.Palette;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.example.android.nasapod.ImageUrlDownloadUtil;
 import com.example.android.nasapod.MyApp;
 import com.example.android.nasapod.R;
 import com.example.android.nasapod.SharedPref;
@@ -34,6 +35,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
 
+import static com.example.android.nasapod.ImageUrlDownloadUtil.DEFAULT_REQUEST_CODE_FOR_WRITE_PERMISSION;
+
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -41,6 +44,7 @@ public class DetailActivity extends AppCompatActivity {
     private static final String APOD_TRANSITION_NAME = "ApodTransitionName";
     private final SharedPref sharedPref = new SharedPref(MyApp.getAppContext());
     private CoordinatorLayout coordinatorLayout;
+    private String mWallpaperUrl;
 
 
     public static Intent newIntent(Context context, Apod apod, View view) {
@@ -64,6 +68,7 @@ public class DetailActivity extends AppCompatActivity {
         String apodTransitionName = intent.getStringExtra(APOD_TRANSITION_NAME);
 
         if (apod != null) {
+            mWallpaperUrl = apod.getApodImage();
             String imageExtra = apod.getApodImage();
             String titleExtra = apod.getApodName();
             String dateExtra = apod.getApodDate();
@@ -153,6 +158,7 @@ public class DetailActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.save_menu_item:
+                ImageUrlDownloadUtil.attemptToDownload(this, mWallpaperUrl, DEFAULT_REQUEST_CODE_FOR_WRITE_PERMISSION);
                 Toast.makeText(this, "Image Saved", Toast.LENGTH_SHORT).show();
                 return true;
 

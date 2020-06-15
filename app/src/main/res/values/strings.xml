@@ -31,5 +31,6 @@
     <string name="icon_info">"Icon made by Icongeek26 from www.flaticon.com"</string>
     <string name="icon">Icon</string>
     <string name="range_date">Range date</string>
+    <string name="permission_write_external_rationale_message">permision write external rationale message</string>
 
 </resources>
