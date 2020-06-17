@@ -159,8 +159,12 @@ public class DetailActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.save_menu_item:
-                ImageUrlDownloadUtil.attemptToDownload(this, mWallpaperUrl, DEFAULT_REQUEST_CODE_FOR_WRITE_PERMISSION);
-                Toast.makeText(this, "Image Saved", Toast.LENGTH_SHORT).show();
+                if (mWallpaperUrl.endsWith("jpg")) {
+                    ImageUrlDownloadUtil.attemptToDownload(this, mWallpaperUrl, DEFAULT_REQUEST_CODE_FOR_WRITE_PERMISSION);
+                    Toast.makeText(this, "Image Saved", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Unable to Download", Toast.LENGTH_SHORT).show();
+                }
                 return true;
 
             default:

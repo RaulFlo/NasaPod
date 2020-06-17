@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements ApodAdapter.Adapt
 
     private ApodAdapter mApodAdapter;
     private static final int SHOW_YEARS = 5;
-    private static final int FROM_DAY_REQUESTED = 20;
+    private static final int FROM_DAY_REQUESTED = 15;
     private static final int TO_DAY_REQUESTED = 1;
     private String rangeDate;
     private boolean isRangeSelected;
