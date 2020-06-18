@@ -45,7 +45,7 @@ public class DetailActivity extends AppCompatActivity {
     private static final String APOD_TRANSITION_NAME = "ApodTransitionName";
     private final SharedPref sharedPref = new SharedPref(MyApp.getAppContext());
     private CoordinatorLayout coordinatorLayout;
-    private String mWallpaperUrl;
+    private String downloadImageUrl;
 
 
     public static Intent newIntent(Context context, Apod apod, View view) {
@@ -69,7 +69,7 @@ public class DetailActivity extends AppCompatActivity {
         String apodTransitionName = intent.getStringExtra(APOD_TRANSITION_NAME);
 
         if (apod != null) {
-            mWallpaperUrl = apod.getApodImage();
+            downloadImageUrl = apod.getApodImage();
             String imageExtra = apod.getApodImage();
             String titleExtra = apod.getApodName();
             String dateExtra = apod.getApodDate();
@@ -159,8 +159,8 @@ public class DetailActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.save_menu_item:
-                if (mWallpaperUrl.endsWith("jpg")) {
-                    ImageUrlDownloadUtil.attemptToDownload(this, mWallpaperUrl, DEFAULT_REQUEST_CODE_FOR_WRITE_PERMISSION);
+                if (downloadImageUrl.endsWith("jpg")) {
+                    ImageUrlDownloadUtil.attemptToDownload(this, downloadImageUrl, DEFAULT_REQUEST_CODE_FOR_WRITE_PERMISSION);
                     Toast.makeText(this, "Image Saved", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(this, "Unable to Download", Toast.LENGTH_SHORT).show();
@@ -179,7 +179,7 @@ public class DetailActivity extends AppCompatActivity {
         switch (requestCode) {
             case DEFAULT_REQUEST_CODE_FOR_WRITE_PERMISSION:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    ImageUrlDownloadUtil.attemptToDownload(this, mWallpaperUrl, DEFAULT_REQUEST_CODE_FOR_WRITE_PERMISSION);
+                    ImageUrlDownloadUtil.attemptToDownload(this, downloadImageUrl, DEFAULT_REQUEST_CODE_FOR_WRITE_PERMISSION);
                 }
                 break;
         }

@@ -17,9 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
-import com.example.android.nasapod.R;
-
 import static android.content.Context.DOWNLOAD_SERVICE;
 
 public final class ImageUrlDownloadUtil {
@@ -47,11 +44,11 @@ public final class ImageUrlDownloadUtil {
         return returnName;
     }
 
-    public static void attemptToDownload(final @Nullable Activity activityContext, final @Nullable String wallpaperUrl, final int requestCode) {
-        if (activityContext != null && !TextUtils.isEmpty(wallpaperUrl)) {
+    public static void attemptToDownload(final @Nullable Activity activityContext, final @Nullable String downloadUrl, final int requestCode) {
+        if (activityContext != null && !TextUtils.isEmpty(downloadUrl)) {
 
             if (hasPermission(activityContext)) {
-                startDownloading(activityContext, wallpaperUrl);
+                startDownloading(activityContext, downloadUrl);
             } else {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(activityContext, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                     AlertDialog.Builder alertBuilder = new AlertDialog.Builder(activityContext);
