@@ -1,25 +1,31 @@
 package com.example.android.nasapod.activities;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.palette.graphics.Palette;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.example.android.nasapod.ImageUrlDownloadUtil;
 import com.example.android.nasapod.MyApp;
 import com.example.android.nasapod.R;
 import com.example.android.nasapod.SharedPref;
@@ -30,6 +36,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
 
+import static com.example.android.nasapod.ImageUrlDownloadUtil.DEFAULT_REQUEST_CODE_FOR_WRITE_PERMISSION;
+
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -37,6 +45,7 @@ public class DetailActivity extends AppCompatActivity {
     private static final String APOD_TRANSITION_NAME = "ApodTransitionName";
     private final SharedPref sharedPref = new SharedPref(MyApp.getAppContext());
     private CoordinatorLayout coordinatorLayout;
+    private String downloadImageUrl;
 
 
     public static Intent newIntent(Context context, Apod apod, View view) {
@@ -60,6 +69,7 @@ public class DetailActivity extends AppCompatActivity {
         String apodTransitionName = intent.getStringExtra(APOD_TRANSITION_NAME);
 
         if (apod != null) {
+            downloadImageUrl = apod.getApodImage();
             String imageExtra = apod.getApodImage();
             String titleExtra = apod.getApodName();
             String dateExtra = apod.getApodDate();
@@ -134,6 +144,45 @@ public class DetailActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.detail_menu, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.save_menu_item:
+                if (downloadImageUrl.endsWith("jpg")) {
+                    ImageUrlDownloadUtil.attemptToDownload(this, downloadImageUrl, DEFAULT_REQUEST_CODE_FOR_WRITE_PERMISSION);
+                    Toast.makeText(this, "Image Saved", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Unable to Download", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case DEFAULT_REQUEST_CODE_FOR_WRITE_PERMISSION:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    ImageUrlDownloadUtil.attemptToDownload(this, downloadImageUrl, DEFAULT_REQUEST_CODE_FOR_WRITE_PERMISSION);
+                }
+                break;
+        }
     }
 }
 
