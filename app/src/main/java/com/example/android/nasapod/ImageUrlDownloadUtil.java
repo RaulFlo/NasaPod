@@ -19,6 +19,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import static android.content.Context.DOWNLOAD_SERVICE;
 
+@SuppressWarnings("ConstantConditions")
 public final class ImageUrlDownloadUtil {
     public static final int DEFAULT_REQUEST_CODE_FOR_WRITE_PERMISSION = 42;
 
