@@ -35,5 +35,6 @@
     <string name="permission_write_external_rationale_message">We need permission to write to
         external storage to save your images</string>
     <string name="download_picture">Download Picture</string>
+    <string name="copyright">Copyright</string>
 
 </resources>

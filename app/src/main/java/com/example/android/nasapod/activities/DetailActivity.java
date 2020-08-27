@@ -74,6 +74,7 @@ public class DetailActivity extends AppCompatActivity {
             String titleExtra = apod.getApodName();
             String dateExtra = apod.getApodDate();
             String explanationExtra = apod.getApodExplanation();
+            String copyrightExtra = apod.getCopyright();
 
             String getConvertedDate = null;
             try {
@@ -90,6 +91,7 @@ public class DetailActivity extends AppCompatActivity {
             TextView textViewTitle = findViewById(R.id.text_view_title_detail);
             TextView textViewDate = findViewById(R.id.text_view_date_detail);
             TextView textViewExplanation = findViewById(R.id.text_view_explanation);
+            TextView textViewCopyright = findViewById(R.id.text_view_copyright);
 
             //link extras to the view
             //Glide.with(this).load(imageExtra).fitCenter().into(imageView);
@@ -114,6 +116,7 @@ public class DetailActivity extends AppCompatActivity {
             textViewTitle.setText(titleExtra);
             textViewDate.setText(getConvertedDate);
             textViewExplanation.setText(explanationExtra);
+            textViewCopyright.setText(String.format("Copyright: %s", copyrightExtra));
         }
     }
 
