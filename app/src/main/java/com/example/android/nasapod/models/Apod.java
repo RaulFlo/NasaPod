@@ -9,6 +9,8 @@ public class Apod implements Parcelable {
 
     @SerializedName("url")
     private final String mApodImage;
+    @SerializedName("hdurl")
+    private final String mHdImage;
     @SerializedName("title")
     private final String mApodName;
     @SerializedName("date")
@@ -20,6 +22,7 @@ public class Apod implements Parcelable {
 
     private Apod(Parcel in) {
         mApodImage = in.readString();
+        mHdImage = in.readString();
         mApodName = in.readString();
         mApodDate = in.readString();
         mExplanation = in.readString();
@@ -29,6 +32,7 @@ public class Apod implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(mApodImage);
+        dest.writeString(mHdImage);
         dest.writeString(mApodName);
         dest.writeString(mApodDate);
         dest.writeString(mExplanation);
@@ -55,6 +59,8 @@ public class Apod implements Parcelable {
     public String getApodImage() {
         return mApodImage;
     }
+
+    public String getHdImage(){return mHdImage;}
 
     public String getApodName() {
         return mApodName;

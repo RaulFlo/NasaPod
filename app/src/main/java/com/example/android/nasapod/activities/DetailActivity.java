@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -30,6 +31,8 @@ import com.example.android.nasapod.MyApp;
 import com.example.android.nasapod.R;
 import com.example.android.nasapod.SharedPref;
 import com.example.android.nasapod.models.Apod;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -69,7 +72,7 @@ public class DetailActivity extends AppCompatActivity {
         String apodTransitionName = intent.getStringExtra(APOD_TRANSITION_NAME);
 
         if (apod != null) {
-            downloadImageUrl = apod.getApodImage();
+            downloadImageUrl = apod.getHdImage();
             String imageExtra = apod.getApodImage();
             String titleExtra = apod.getApodName();
             String dateExtra = apod.getApodDate();
@@ -92,6 +95,7 @@ public class DetailActivity extends AppCompatActivity {
             TextView textViewDate = findViewById(R.id.text_view_date_detail);
             TextView textViewExplanation = findViewById(R.id.text_view_explanation);
             TextView textViewCopyright = findViewById(R.id.text_view_copyright);
+            FloatingActionButton floatingActionButton = findViewById(R.id.fab);
 
             //link extras to the view
             //Glide.with(this).load(imageExtra).fitCenter().into(imageView);
@@ -117,6 +121,13 @@ public class DetailActivity extends AppCompatActivity {
             textViewDate.setText(getConvertedDate);
             textViewExplanation.setText(explanationExtra);
             textViewCopyright.setText(String.format("Copyright: %s", copyrightExtra));
+
+            floatingActionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(downloadImageUrl)));
+                }
+            });
         }
     }
 
