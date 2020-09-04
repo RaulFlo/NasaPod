@@ -78,6 +78,7 @@ public class DetailActivity extends AppCompatActivity {
             String explanationExtra = apod.getApodExplanation();
             String copyrightExtra = apod.getCopyright();
 
+
             String getConvertedDate = null;
             try {
                 getConvertedDate = convertDate(dateExtra);
@@ -119,7 +120,12 @@ public class DetailActivity extends AppCompatActivity {
             textViewTitle.setText(titleExtra);
             textViewDate.setText(getConvertedDate);
             textViewExplanation.setText(explanationExtra);
-            textViewCopyright.setText(String.format("Copyright: %s", copyrightExtra));
+
+            if (copyrightExtra == null) {
+                textViewCopyright.setText("");
+            } else {
+                textViewCopyright.setText(String.format("Copyright: %s", copyrightExtra));
+            }
 
             floatingActionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
