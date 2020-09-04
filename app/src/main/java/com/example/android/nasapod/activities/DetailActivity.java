@@ -26,20 +26,19 @@ import androidx.palette.graphics.Palette;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.example.android.nasapod.ImageUrlDownloadUtil;
+import com.example.android.nasapod.internal.ImageUrlDownloadUtil;
 import com.example.android.nasapod.MyApp;
 import com.example.android.nasapod.R;
-import com.example.android.nasapod.SharedPref;
+import com.example.android.nasapod.internal.SharedPref;
 import com.example.android.nasapod.models.Apod;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
 
-import static com.example.android.nasapod.ImageUrlDownloadUtil.DEFAULT_REQUEST_CODE_FOR_WRITE_PERMISSION;
+import static com.example.android.nasapod.internal.ImageUrlDownloadUtil.DEFAULT_REQUEST_CODE_FOR_WRITE_PERMISSION;
 
 
 public class DetailActivity extends AppCompatActivity {

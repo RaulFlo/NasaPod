@@ -1,4 +1,4 @@
-package com.example.android.nasapod;
+package com.example.android.nasapod.internal;
 
 import com.example.android.nasapod.models.Apod;
 import retrofit2.Call;

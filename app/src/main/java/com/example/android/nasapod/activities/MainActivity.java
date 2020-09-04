@@ -17,11 +17,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.android.nasapod.ApodRepoAndDate;
-import com.example.android.nasapod.GetListPicOfTheDayAsyncTask;
+import com.example.android.nasapod.internal.ApodRepoAndDate;
+import com.example.android.nasapod.internal.GetListPicOfTheDayAsyncTask;
 import com.example.android.nasapod.MyApp;
 import com.example.android.nasapod.R;
-import com.example.android.nasapod.SharedPref;
+import com.example.android.nasapod.internal.SharedPref;
 import com.example.android.nasapod.adapter.ApodAdapter;
 import com.example.android.nasapod.models.Apod;
 import com.example.android.nasapod.repo.ApodRepo;

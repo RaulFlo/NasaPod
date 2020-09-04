@@ -1,4 +1,4 @@
-package com.example.android.nasapod;
+package com.example.android.nasapod.internal;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

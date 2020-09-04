@@ -1,4 +1,4 @@
-package com.example.android.nasapod;
+package com.example.android.nasapod.internal;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

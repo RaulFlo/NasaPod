@@ -1,6 +1,8 @@
-package com.example.android.nasapod;
+package com.example.android.nasapod.internal;
 
 import android.os.AsyncTask;
+
+import com.example.android.nasapod.internal.ApodRepoAndDate;
 import com.example.android.nasapod.models.Apod;
 import org.joda.time.LocalDate;
 import java.util.List;

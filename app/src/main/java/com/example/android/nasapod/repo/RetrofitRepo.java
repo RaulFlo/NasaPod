@@ -2,8 +2,8 @@ package com.example.android.nasapod.repo;
 
 
 import android.util.Log;
-import com.example.android.nasapod.GetDataService;
-import com.example.android.nasapod.RetrofitClientInstance;
+import com.example.android.nasapod.internal.GetDataService;
+import com.example.android.nasapod.internal.RetrofitClientInstance;
 import com.example.android.nasapod.models.Apod;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;

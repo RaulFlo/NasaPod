@@ -1,4 +1,4 @@
-package com.example.android.nasapod;
+package com.example.android.nasapod.internal;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -17,6 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import com.example.android.nasapod.R;
+
 import static android.content.Context.DOWNLOAD_SERVICE;
 
 @SuppressWarnings("ConstantConditions")

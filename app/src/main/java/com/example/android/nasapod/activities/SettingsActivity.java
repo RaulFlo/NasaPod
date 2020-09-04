@@ -10,7 +10,7 @@ import android.widget.Switch;
 
 import com.example.android.nasapod.MyApp;
 import com.example.android.nasapod.R;
-import com.example.android.nasapod.SharedPref;
+import com.example.android.nasapod.internal.SharedPref;
 
 import java.util.Objects;
 
