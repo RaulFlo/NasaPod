@@ -1,3 +1,7 @@
 # NasaPod
 
-Java(Playstore: http://bit.ly/3tmHTal)- Application that uses 				Nasa Apod(Astronomy Picture of the Day) Api. Using RecyclerView 			to display Cardview and allowing download of picture.	
+
+NasaPod- Java(Playstore: http://bit.ly/3tmHTal)- 
+Released, designed and implemented an app to display the Astronomy Picture of the day.
+			-Used Nasa Apod (Astronomy Picture of the day) REST Api to display a list of Apods and details using retrofit
+			-Provided dynamic unique design for each picture using the color-palette library	
